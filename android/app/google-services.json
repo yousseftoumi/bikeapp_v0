@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "606178787059",
+    "project_id": "bikeapp-45b36",
+    "storage_bucket": "bikeapp-45b36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606178787059:android:0cb34b8ea79ecfacf48186",
+        "android_client_info": {
+          "package_name": "com.example.bikeapp_v0"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf5IhBRfRtTBpaIX1cXT4gfTfnr6iUv_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606178787059:android:15b970abb0254e8af48186",
+        "android_client_info": {
+          "package_name": "com.example.bikeapp_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf5IhBRfRtTBpaIX1cXT4gfTfnr6iUv_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
