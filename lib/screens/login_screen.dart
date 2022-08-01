@@ -1,14 +1,17 @@
+// import 'dart:js';
+
+import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/home_screen.dart';
-// import 'package:auth_bikeapp/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bikeapp_v0/screens/registeration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+// import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -310,7 +313,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-// // handling google sigin in
+// handling google sigin in
 // Future handleGoogleSignIn() async {
 //   final sp = context.read<SignInProvider>();
 //   final ip = context.read<InternetProvider>();
