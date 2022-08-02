@@ -1,8 +1,9 @@
-// import 'dart:js';
-
 import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/home_screen.dart';
+import 'package:bikeapp_v0/screens/phoneauth_screen.dart';
+import 'package:bikeapp_v0/utils/next_screen.dart';
+import 'package:bikeapp_v0/utils/snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bikeapp_v0/screens/registeration_screen.dart';
 import 'package:flutter/material.dart';
@@ -261,6 +262,37 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(
                           height: 10,
                         ),
+
+                        // phoneAuth loading button
+                        RoundedLoadingButton(
+                          onPressed: () {
+                            nextScreenReplace(context, const PhoneAuthScreen());
+                            phoneController.reset();
+                          },
+                          controller: phoneController,
+                          successColor: Colors.black,
+                          width: MediaQuery.of(context).size.width * 0.80,
+                          elevation: 0,
+                          borderRadius: 25,
+                          color: Colors.black,
+                          child: Wrap(
+                            children: const [
+                              Icon(
+                                FontAwesomeIcons.phone,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text("Sign in with Phone",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500)),
+                            ],
+                          ),
+                        ),
                       ]),
                 ],
               ),
@@ -311,44 +343,91 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
   }
-}
 
 // handling google sigin in
-// Future handleGoogleSignIn() async {
-//   final sp = context.read<SignInProvider>();
-//   final ip = context.read<InternetProvider>();
-//   await ip.checkInternetConnection();
+  Future handleGoogleSignIn() async {
+    final sp = context.read<SignInProvider>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
 
-//   if (ip.hasInternet == false) {
-//     openSnackbar(context, "Check your Internet connection", Colors.red);
-//     googleController.reset();
-//   } else {
-//     await sp.signInWithGoogle().then((value) {
-//       if (sp.hasError == true) {
-//         openSnackbar(context, sp.errorCode.toString(), Colors.red);
-//         googleController.reset();
-//       } else {
-//         // checking whether user exists or not
-//         sp.checkUserExists().then((value) async {
-//           if (value == true) {
-//             // user exists
-//             await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
-//                 .saveDataToSharedPreferences()
-//                 .then((value) => sp.setSignIn().then((value) {
-//                       googleController.success();
-//                       handleAfterSignIn();
-//                     })));
-//           } else {
-//             // user does not exist
-//             sp.saveDataToFirestore().then((value) => sp
-//                 .saveDataToSharedPreferences()
-//                 .then((value) => sp.setSignIn().then((value) {
-//                       googleController.success();
-//                       handleAfterSignIn();
-//                     })));
-//           }
-//         });
-//       }
-//     });
-//   }
-// }
+    if (ip.hasInternet == false) {
+      openSnackbar(context, "Check your Internet connection", Colors.red);
+      googleController.reset();
+    } else {
+      await sp.signInWithGoogle().then((value) {
+        if (sp.hasError == true) {
+          openSnackbar(context, sp.errorCode.toString(), Colors.red);
+          googleController.reset();
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToFirestore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
+  //handling Facebookauth
+  Future handleFacebookAuth() async {
+    final sp = context.read<SignInProvider>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      openSnackbar(context, "Check your Internet connection", Colors.red);
+      facebookController.reset();
+    } else {
+      await sp.signInWithFacebook().then((value) {
+        if (sp.hasError == true) {
+          openSnackbar(context, sp.errorCode.toString(), Colors.red);
+          facebookController.reset();
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        facebookController.success();
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToFirestore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        facebookController.success();
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
+  // handle after signin
+  handleAfterSignIn() {
+    Future.delayed(const Duration(milliseconds: 1000)).then((value) {
+      nextScreenReplace(context, const HomeScreen());
+    });
+  }
+}
