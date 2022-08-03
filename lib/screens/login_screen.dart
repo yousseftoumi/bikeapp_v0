@@ -11,7 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  // GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
   bool _obscureText = true;
   // form key
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            signIn(emailController.text, passwordController.text);
+            handleEmailSignIn(emailController.text, passwordController.text);
           },
           child: Text(
             "Login",
@@ -200,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         RoundedLoadingButton(
                           onPressed: () {
-                            // handleGoogleSignIn();
+                            handleGoogleSignIn();
                           },
                           controller: googleController,
                           successColor: Colors.red,
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         // facebook login button
                         RoundedLoadingButton(
                           onPressed: () {
-                            // handleFacebookAuth();
+                            handleFacebookAuth();
                           },
                           controller: facebookController,
                           successColor: Colors.blue,
@@ -304,7 +304,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // login function
-  void signIn(String email, String password) async {
+  void handleEmailSignIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
         await _auth
