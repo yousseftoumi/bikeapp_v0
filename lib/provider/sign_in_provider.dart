@@ -62,6 +62,48 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Future signInWithEmail() async {
+  //   final LoginResult result = await facebookAuth.login();
+
+  //   if (result.status == LoginStatus.success) {
+  //     try {
+  //       final OAuthCredential credential =
+  //           FacebookAuthProvider.credential(result.accessToken!.token);
+  //       await firebaseAuth.signInWithCredential(credential);
+  //       // saving the values
+  //       _name = profile['name'];
+  //       _email = profile['email'];
+  //       _imageUrl = profile['picture']['data']['url'];
+  //       _uid = profile['id'];
+  //       _hasError = false;
+  //       _provider = "EMAIL";
+  //       notifyListeners();
+  //     } on FirebaseAuthException catch (e) {
+  //       switch (e.code) {
+  //         case "account-exists-with-different-credential":
+  //           _errorCode =
+  //               "You already have an account with us. Use correct provider";
+  //           _hasError = true;
+  //           notifyListeners();
+  //           break;
+
+  //         case "null":
+  //           _errorCode = "Some unexpected error while trying to sign in";
+  //           _hasError = true;
+  //           notifyListeners();
+  //           break;
+  //         default:
+  //           _errorCode = e.toString();
+  //           _hasError = true;
+  //           notifyListeners();
+  //       }
+  //     }
+  //   } else {
+  //     _hasError = true;
+  //     notifyListeners();
+  //   }
+  // }
+
   // // sign in with google
   Future signInWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =

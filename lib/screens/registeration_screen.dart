@@ -20,8 +20,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   // our form key
   final _formKey = GlobalKey<FormState>();
   //editing Controller
-  final firstNameEditingController = new TextEditingController();
-  final secondNameEditingController = new TextEditingController();
+  final nameEditingController = new TextEditingController();
+  // final secondNameEditingController = new TextEditingController();
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
@@ -29,9 +29,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     //first name field
-    final firstNameField = TextFormField(
+    final nameField = TextFormField(
         autofocus: false,
-        controller: firstNameEditingController,
+        controller: nameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{3,}$');
@@ -44,7 +44,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           return null;
         },
         onSaved: (value) {
-          firstNameEditingController.text = value!;
+          nameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -57,31 +57,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ));
 
     //second name field
-    final secondNameField = TextFormField(
-        autofocus: false,
-        controller: secondNameEditingController,
-        keyboardType: TextInputType.name,
-        validator: (value) {
-          RegExp regex = new RegExp(r'^.{3,}$');
-          if (value!.isEmpty) {
-            return ("Veuillez saisir votre Prénom ");
-          }
-          if (!regex.hasMatch(value)) {
-            return ("Veuillez saisir un prénom valide (Min. 3 caractères) ");
-          }
-        },
-        onSaved: (value) {
-          secondNameEditingController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Prenom",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+    // final secondNameField = TextFormField(
+    //     autofocus: false,
+    //     controller: secondNameEditingController,
+    //     keyboardType: TextInputType.name,
+    //     validator: (value) {
+    //       RegExp regex = new RegExp(r'^.{3,}$');
+    //       if (value!.isEmpty) {
+    //         return ("Veuillez saisir votre Prénom ");
+    //       }
+    //       if (!regex.hasMatch(value)) {
+    //         return ("Veuillez saisir un prénom valide (Min. 3 caractères) ");
+    //       }
+    //     },
+    //     onSaved: (value) {
+    //       secondNameEditingController.text = value!;
+    //     },
+    //     textInputAction: TextInputAction.next,
+    //     decoration: InputDecoration(
+    //       prefixIcon: Icon(Icons.account_circle),
+    //       contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+    //       hintText: "Prenom",
+    //       border: OutlineInputBorder(
+    //         borderRadius: BorderRadius.circular(10),
+    //       ),
+    //     ));
 
     //email field
     final emailField = TextFormField(
@@ -126,7 +126,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           }
         },
         onSaved: (value) {
-          firstNameEditingController.text = value!;
+          nameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -230,9 +230,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           fit: BoxFit.contain,
                         )),
                     SizedBox(height: 45),
-                    firstNameField,
-                    SizedBox(height: 20),
-                    secondNameField,
+                    nameField,
+                    // SizedBox(height: 20),
+                    // secondNameField,
                     SizedBox(height: 20),
                     emailField,
                     SizedBox(height: 20),
@@ -275,8 +275,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     // writing all the values
     userModel.email = user!.email;
     userModel.uid = user.uid;
-    userModel.firstName = firstNameEditingController.text;
-    userModel.lastName = secondNameEditingController.text;
+    userModel.name = nameEditingController.text;
+    userModel.image_url =
+        "https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png";
+    userModel.provider = "EMAIL";
+    // userModel.lastName = secondNameEditingController.text;
 
     await firebaseFirestore
         .collection("users")

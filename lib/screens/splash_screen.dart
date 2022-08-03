@@ -36,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Center(
             child: Image(
           image: AssetImage(Config.app_icon),
-          height: 80,
-          width: 80,
+          height: 200,
+          width: 200,
         )),
       ),
     );

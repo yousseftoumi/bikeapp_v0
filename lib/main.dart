@@ -1,3 +1,4 @@
+import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/login_screen.dart';
 import 'package:bikeapp_v0/screens/splash_screen.dart';
@@ -29,9 +30,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: ((context) => SignInProvider()),
         ),
-        // ChangeNotifierProvider(
-        //   create: ((context) => InternetProvider()),
-        // ),
+        ChangeNotifierProvider(
+          create: ((context) => InternetProvider()),
+        ),
       ],
       child: const MaterialApp(
         home: SplashScreen(),
