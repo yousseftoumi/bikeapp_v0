@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "606178787059-h4dsb7jg9ram9tudd9ebjt0nolervpdu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bikeapp_v0",
+            "certificate_hash": "bd38d68f58a09eebdfa22ab5f16a294bf7ca8aed"
+          }
+        },
+        {
           "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "606178787059-gmt9d2oat6f78m4kblqai95ousrpr7uv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bikeappV0"
+              }
             }
           ]
         }
@@ -58,6 +73,13 @@
             {
               "client_id": "606178787059-mfbd65j1i62bprc1ge172a9kuieuklj4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "606178787059-gmt9d2oat6f78m4kblqai95ousrpr7uv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bikeappV0"
+              }
             }
           ]
         }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bikeapp_v0/utils/config.dart';
+import 'package:bikeapp_v0/screens/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -62,49 +63,69 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future signInWithEmail() async {
-  //   final LoginResult result = await facebookAuth.login();
+  Future signInWithEmail(String email, String password) async {
+    // User? user = FirebaseAuth.instance.currentUser;
+    // if (user != null) {
+    // executing our authentication
+    try {
+      // signing to firebase user instance
+      final User userDetails = (await firebaseAuth.signInWithEmailAndPassword(
+              email: email, password: password))
+          .user!;
 
-  //   if (result.status == LoginStatus.success) {
-  //     try {
-  //       final OAuthCredential credential =
-  //           FacebookAuthProvider.credential(result.accessToken!.token);
-  //       await firebaseAuth.signInWithCredential(credential);
-  //       // saving the values
-  //       _name = profile['name'];
-  //       _email = profile['email'];
-  //       _imageUrl = profile['picture']['data']['url'];
-  //       _uid = profile['id'];
-  //       _hasError = false;
-  //       _provider = "EMAIL";
-  //       notifyListeners();
-  //     } on FirebaseAuthException catch (e) {
-  //       switch (e.code) {
-  //         case "account-exists-with-different-credential":
-  //           _errorCode =
-  //               "You already have an account with us. Use correct provider";
-  //           _hasError = true;
-  //           notifyListeners();
-  //           break;
+      // now save all values
+      _name = userDetails.displayName;
+      _email = userDetails.email;
+      _imageUrl = userDetails.photoURL;
+      _provider = "EMAIL";
+      _uid = userDetails.uid;
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "invalid-email":
+          _errorCode = "Your email address appears to be malformed.";
+          _hasError = true;
+          notifyListeners();
+          break;
+        case "wrong-password":
+          _errorCode = "Your password is wrong.";
+          _hasError = true;
+          notifyListeners();
+          break;
+        case "user-not-found":
+          _errorCode = "User with this email doesn't exist.";
+          _hasError = true;
+          notifyListeners();
+          break;
+        case "user-disabled":
+          _errorCode = "User with this email has been disabled.";
+          _hasError = true;
+          notifyListeners();
+          break;
+        case "too-many-requests":
+          _errorCode = "Too many requests";
+          _hasError = true;
+          notifyListeners();
+          break;
+        case "operation-not-allowed":
+          _errorCode = "Signing in with Email and Password is not enabled.";
+          _hasError = true;
+          notifyListeners();
+          break;
+        default:
+          _errorCode = "An undefined Error happened.";
+          _hasError = true;
+          notifyListeners();
+          break;
+      }
+    }
+    // } else {
+    //   _hasError = true;
+    //   notifyListeners();
+    // }
+  }
 
-  //         case "null":
-  //           _errorCode = "Some unexpected error while trying to sign in";
-  //           _hasError = true;
-  //           notifyListeners();
-  //           break;
-  //         default:
-  //           _errorCode = e.toString();
-  //           _hasError = true;
-  //           notifyListeners();
-  //       }
-  //     }
-  //   } else {
-  //     _hasError = true;
-  //     notifyListeners();
-  //   }
-  // }
-
-  // // sign in with google
+  // sign in with google
   Future signInWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
