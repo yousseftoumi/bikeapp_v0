@@ -124,7 +124,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.phone),
-                      hintText: "+1-1234567890",
+                      hintText: "+212 663-64897623",
                       hintStyle: TextStyle(color: Colors.grey[600]),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -144,7 +144,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     login(context, phoneController.text.trim());
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+                    primary: Colors.blueAccent,
                   ),
                   child: const Text("Register"),
                 )

@@ -63,6 +63,65 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Future signUpWithEmail(String email, String password) async {
+  //   try {
+  //     // signing to firebase user instance
+  //     final User userDetails = (await firebaseAuth
+  //             .createUserWithEmailAndPassword(email: email, password: password))
+  //         .user!;
+
+  //     // now save all values
+  //     _name = userDetails.displayName;
+  //     _email = userDetails.email;
+  //     _imageUrl = userDetails.photoURL;
+  //     _provider = "EMAIL";
+  //     _uid = userDetails.uid;
+  //     notifyListeners();
+  //   } on FirebaseAuthException catch (e) {
+  //     switch (e.code) {
+  //       case "invalid-email":
+  //         _errorCode = "Your email address appears to be malformed.";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //       case "wrong-password":
+  //         _errorCode = "Your password is wrong.";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //       case "user-not-found":
+  //         _errorCode = "User with this email doesn't exist.";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //       case "user-disabled":
+  //         _errorCode = "User with this email has been disabled.";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //       case "too-many-requests":
+  //         _errorCode = "Too many requests";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //       case "operation-not-allowed":
+  //         _errorCode = "Signing in with Email and Password is not enabled.";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //       default:
+  //         _errorCode = "An undefined Error happened.";
+  //         _hasError = true;
+  //         notifyListeners();
+  //         break;
+  //     }
+  //   }
+  //   // } else {
+  //   //   _hasError = true;
+  //   //   notifyListeners();
+  //   // }
+  // }
+
   Future signInWithEmail(String email, String password) async {
     // User? user = FirebaseAuth.instance.currentUser;
     // if (user != null) {

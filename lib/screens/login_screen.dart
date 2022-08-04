@@ -145,16 +145,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                      height: 200,
+                      height: 185,
                       child: Image.asset(
                         "assets/bikeAppLogo.png",
                         fit: BoxFit.contain,
                       )),
-                  SizedBox(height: 45),
+                  SizedBox(height: 15),
                   emailField,
                   SizedBox(height: 25),
                   passwordField,
-                  SizedBox(height: 35),
+                  SizedBox(height: 25),
                   loginButton,
                   SizedBox(height: 15),
                   Row(

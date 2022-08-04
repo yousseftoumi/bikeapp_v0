@@ -28,14 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
+    // FirebaseFirestore.instance
+    //     .collection("users")
+    //     .doc(user!.uid)
+    //     .get()
+    //     .then((value) {
+    //   this.loggedInUser = UserModel.fromMap(value.data());
+    //   setState(() {});
+    // });
     getData();
   }
 
