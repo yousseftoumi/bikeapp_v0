@@ -1,3 +1,4 @@
+import 'package:bikeapp_v0/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
@@ -49,8 +50,9 @@ class _NavBarState extends State<NavBar> {
             decoration: BoxDecoration(
               color: Colors.blue,
               image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/bgbike.png'),
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                    'https://hdwallpaperim.com/wp-content/uploads/2017/08/24/99743-bicycle-simple_background.jpg'),
               ),
             ),
           ),
@@ -103,10 +105,12 @@ class _NavBarState extends State<NavBar> {
           ),
           Divider(),
           ListTile(
-            title: Text('Exit'),
-            leading: Icon(Icons.exit_to_app),
-            onTap: () => null,
-          ),
+              title: Text('Se déconnecter'),
+              leading: Icon(Icons.exit_to_app),
+              onTap: () {
+                sp.userSignOut();
+                nextScreenReplace(context, const LoginScreen());
+              }),
         ],
       ),
     );
