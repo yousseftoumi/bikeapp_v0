@@ -87,80 +87,89 @@ class _HomeScreenState extends State<HomeScreen> {
     //     ),
     //   ),
     // );
+    //Social auth
+    // return Scaffold(
+    //   drawer: NavBar(),
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.blue,
+    //     elevation: 0,
+    //   ),
+    //   body: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: <Widget>[
+    //         CircleAvatar(
+    //           backgroundColor: Colors.white,
+    //           backgroundImage: NetworkImage("${sp.imageUrl}"),
+    //           radius: 50,
+    //         ),
+    //         const SizedBox(
+    //           height: 20,
+    //         ),
+    //         Text(
+    //           "Welcome ${sp.name}",
+    //           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+    //         ),
+    //         const SizedBox(
+    //           height: 10,
+    //         ),
+    //         Text(
+    //           "${sp.email}",
+    //           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+    //         ),
+    //         const SizedBox(
+    //           height: 10,
+    //         ),
+    //         Text(
+    //           "${sp.uid}",
+    //           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+    //         ),
+    //         const SizedBox(
+    //           height: 10,
+    //         ),
+    //         Row(
+    //           crossAxisAlignment: CrossAxisAlignment.center,
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             const Text("PROVIDER:"),
+    //             const SizedBox(
+    //               width: 5,
+    //             ),
+    //             Text("${sp.provider}".toUpperCase(),
+    //                 style: const TextStyle(color: Colors.red)),
+    //           ],
+    //         ),
+    //         const SizedBox(
+    //           height: 20,
+    //         ),
+    //         ElevatedButton(
+    //             onPressed: () {
+    //               sp.userSignOut();
+    //               nextScreenReplace(context, const LoginScreen());
+    //             },
+    //             child: const Text("SIGNOUT",
+    //                 style: TextStyle(
+    //                   color: Colors.white,
+    //                 )))
+    //       ],
+    //     ),
+    //   ),
+    // );
     return Scaffold(
       drawer: NavBar(),
       appBar: AppBar(
         backgroundColor: Colors.blue,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              backgroundImage: NetworkImage("${sp.imageUrl}"),
-              radius: 50,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Welcome ${sp.name}",
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "${sp.email}",
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "${sp.uid}",
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("PROVIDER:"),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text("${sp.provider}".toUpperCase(),
-                    style: const TextStyle(color: Colors.red)),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  sp.userSignOut();
-                  nextScreenReplace(context, const LoginScreen());
-                },
-                child: const Text("SIGNOUT",
-                    style: TextStyle(
-                      color: Colors.white,
-                    )))
-          ],
-        ),
-      ),
+      body: Center(child: Text("Hello")),
     );
   }
 
   // // the logout function
-  Future<void> logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
+  // Future<void> logout(BuildContext context) async {
+  //   await FirebaseAuth.instance.signOut();
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => LoginScreen()));
+  // }
 }
