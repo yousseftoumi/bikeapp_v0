@@ -1,6 +1,6 @@
 import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
-import 'package:bikeapp_v0/screens/login_screen.dart';
+// import 'package:bikeapp_v0/screens/login_screen.dart';
 import 'package:bikeapp_v0/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,7 @@
 import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
+import 'package:bikeapp_v0/screens/navbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,11 @@ class _HomeScreenState extends State<HomeScreen> {
     //   ),
     // );
     return Scaffold(
+      drawer: NavBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        elevation: 0,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
