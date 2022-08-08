@@ -1,11 +1,12 @@
 import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
-import 'package:bikeapp_v0/screens/navbar.dart';
+import 'package:bikeapp_v0/screens/navbar_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bikeapp_v0/utils/card_widget.dart';
 
 import 'login_screen.dart';
 
@@ -16,7 +17,10 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
@@ -28,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    _tabController = new TabController(length: 3, vsync: this, initialIndex: 0)
+      ..addListener(() {});
     super.initState();
     // FirebaseFirestore.instance
     //     .collection("users")
@@ -157,12 +163,77 @@ class _HomeScreenState extends State<HomeScreen> {
     //   ),
     // );
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       drawer: NavBar(),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.menu),
+          color: Colors.blue,
+        ),
+        title: Image.asset(
+          'assets/bikeAppLogo.png',
+          width: 80,
+          height: 80,
+        ),
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(35)),
+        ),
       ),
-      body: Center(child: Text("Hello")),
+      body: Column(
+        children: [
+          Container(
+            child: TabBar(
+              isScrollable: true,
+              indicatorPadding: EdgeInsets.all(10),
+              labelPadding:
+                  EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+              labelColor: Colors.black,
+              labelStyle: TextStyle(fontSize: 20),
+              indicator: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              controller: _tabController,
+              tabs: [
+                Text('Favorite'),
+                Text('Electric'),
+                Text('Classic'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(controller: _tabController, children: [
+              CardWidget(),
+              CardWidget(),
+              CardWidget(),
+            ]),
+          )
+        ],
+      ),
+      bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          ),
+          child: Material(
+            elevation: 0.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40.0)),
+            child: BottomNavigationBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.calendar_month), label: ''),
+                BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
+              ],
+            ),
+          )),
     );
   }
 
