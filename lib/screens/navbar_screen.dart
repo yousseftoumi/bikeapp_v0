@@ -40,7 +40,7 @@ class _NavBarState extends State<NavBar> {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  "${sp.imageUrl}",
+                  "${sp.image_url}",
                   fit: BoxFit.cover,
                   width: 90,
                   height: 90,

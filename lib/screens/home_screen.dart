@@ -1,5 +1,8 @@
+import 'package:bikeapp_v0/model/bike_model.dart';
 import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
+import 'package:bikeapp_v0/screens/registeration_screen.dart';
+import 'package:bikeapp_v0/screens/types.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:bikeapp_v0/screens/navbar_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bikeapp_v0/utils/card_widget.dart';
 
+import '../utils/config.dart';
 import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,9 +36,9 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     // TODO: implement initState
+    super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0)
       ..addListener(() {});
-    super.initState();
     // FirebaseFirestore.instance
     //     .collection("users")
     //     .doc(user!.uid)
@@ -107,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen>
     //       children: <Widget>[
     //         CircleAvatar(
     //           backgroundColor: Colors.white,
-    //           backgroundImage: NetworkImage("${sp.imageUrl}"),
+    //           backgroundImage: NetworkImage("${sp.image_url}"),
     //           radius: 50,
     //         ),
     //         const SizedBox(
@@ -167,20 +171,27 @@ class _HomeScreenState extends State<HomeScreen>
       drawer: NavBar(),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.menu),
-          color: Colors.blue,
-        ),
         title: Image.asset(
           'assets/bikeAppLogo.png',
           width: 80,
           height: 80,
         ),
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.blue),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomRight: Radius.circular(35)),
         ),
+        actions: [
+          TextButton.icon(
+            style: TextButton.styleFrom(primary: Colors.blue),
+            onPressed: () {
+              sp.userSignOut();
+              nextScreenReplace(context, LoginScreen());
+            },
+            icon: Icon(Icons.exit_to_app_sharp),
+            label: Text('LogOut'),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -235,6 +246,45 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           )),
     );
+    // body: Column(
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   children: <Widget>[
+    //     Padding(
+    //       padding: const EdgeInsets.symmetric(horizontal: 30),
+    //       child: Text(
+    //         "Choisir votre vélo",
+    //         style: TextStyle(
+    //             color: Colors.blue,
+    //             fontWeight: FontWeight.bold,
+    //             fontSize: 23),
+    //       ),
+    //     ),
+    //     Types(),
+    // Expanded(
+    //   child: Padding(
+    //     padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+    //     child: GridView.builder(
+    //         itemCount: bikes.length,
+    //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    //           crossAxisCount: 2,
+    //           mainAxisSpacing: kDefaultPaddin,
+    //           crossAxisSpacing: kDefaultPaddin,
+    //           childAspectRatio: 0.75,
+    //         ),
+    //         itemBuilder: (context, index) => ItemCard(
+    //               product: bikes[index],
+    //               press: () => Navigator.push(
+    //                   context,
+    //                   MaterialPageRoute(
+    //                     builder: (context) => DetailsScreen(
+    //                       product: bikes[index],
+    //                     ),
+    //                   )),
+    //             )),
+    //   ),
+    // ),
+    //   ],
+    // ));
   }
 
   // // the logout function

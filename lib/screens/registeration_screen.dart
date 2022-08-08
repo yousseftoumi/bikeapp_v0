@@ -302,7 +302,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.uid = user.uid;
     userModel.name = nameEditingController.text;
     userModel.image_url =
-        "https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png";
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTN9TaGrF3qmBtBoXN5TaTdijk8dUfq2z7w6a-QjVoEjtxv2f2IcWph0-e7avSfpgTjdg&usqp=CAU";
     userModel.provider = "EMAIL";
     // userModel.lastName = secondNameEditingController.text;
 

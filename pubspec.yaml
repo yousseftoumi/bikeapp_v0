@@ -30,6 +30,7 @@ dependencies:
   cloud_firestore: ^3.4.2
   connectivity_plus: ^2.3.6
   cupertino_icons: ^1.0.2
+  enum_to_string: ^2.0.1
   firebase_auth: ^3.3.4
   firebase_core: ^1.20.0
   flutter:
@@ -59,7 +60,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/bikeAppLogo.png
+    - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
