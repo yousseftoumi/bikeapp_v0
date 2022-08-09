@@ -416,4 +416,14 @@ class SignInProvider extends ChangeNotifier {
     _provider = "PHONE";
     notifyListeners();
   }
+
+  void signUpUser(User user, email, name) {
+    _name = name;
+    _email = email;
+    _image_url =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTN9TaGrF3qmBtBoXN5TaTdijk8dUfq2z7w6a-QjVoEjtxv2f2IcWph0-e7avSfpgTjdg&usqp=CAU";
+    _uid = user.uid;
+    _provider = "EMAIL";
+    notifyListeners();
+  }
 }

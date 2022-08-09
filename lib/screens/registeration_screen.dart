@@ -3,6 +3,7 @@ import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/home_screen.dart';
+import 'package:bikeapp_v0/screens/login_screen.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:bikeapp_v0/utils/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -248,6 +249,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     confirmPasswordField,
                     SizedBox(height: 20),
                     signUpButton,
+                    SizedBox(height: 20),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Vous avez déjà un compte? "),
+                          GestureDetector(
+                            onTap: () {
+                              nextScreen(context, LoginScreen());
+                            },
+                            child: Text(
+                              "Se connecter",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                          )
+                        ]),
                   ],
                 ),
               ),
@@ -266,24 +285,42 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       openSnackbar(context, "Check your Internet connection", Colors.red);
     }
     if (_formKey.currentState!.validate()) {
-      // await _auth
-      //     .createUserWithEmailAndPassword(email: email, password: password)
-      //     .then((value) => {
-      //           sp.saveDataToFirestore().then((value) => sp
-      //               .saveDataToSharedPreferences()
-      //               .then((value) => sp.setSignIn().then((value) {
-      //                     postDetailsToFirestore();
-      //                   })))
-      //         })
-      //     .catchError((e) {
-      //   Fluttertoast.showToast(msg: e!.message);
-      // });
+      AuthCredential authCredential =
+          EmailAuthProvider.credential(email: email, password: password);
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsToFirestore()})
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
+      User user =
+          (await FirebaseAuth.instance.signInWithCredential(authCredential))
+              .user!;
+      // save the values
+      sp.signUpUser(user, email, nameEditingController.text);
+      sp.checkUserExists().then((value) async {
+        if (value == true) {
+          // user exists
+          await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+              .saveDataToSharedPreferences()
+              .then((value) => sp.setSignIn().then((value) {
+                    nextScreenReplace(context, const HomeScreen());
+                  })));
+        } else {
+          // user does not exist
+          await sp.saveDataToFirestore().then((value) => sp
+              .saveDataToSharedPreferences()
+              .then((value) => sp.setSignIn().then((value) {
+                    nextScreenReplace(context, const HomeScreen());
+                  })));
+        }
+      });
+      // await _auth
+      //     .createUserWithEmailAndPassword(email: email, password: password)
+      //     .then((value) => {postDetailsToFirestore()})
+      //     .catchError((e) {
+      //   Fluttertoast.showToast(msg: e!.message);
+      // });
     }
   }
 
@@ -304,7 +341,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.image_url =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTN9TaGrF3qmBtBoXN5TaTdijk8dUfq2z7w6a-QjVoEjtxv2f2IcWph0-e7avSfpgTjdg&usqp=CAU";
     userModel.provider = "EMAIL";
-    // userModel.lastName = secondNameEditingController.text;
 
     await firebaseFirestore
         .collection("users")
@@ -312,55 +348,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Compte créé avec succès. :) ");
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-        (route) => false);
+    // Navigator.pushAndRemoveUntil(
+    //     (context),
+    //     MaterialPageRoute(builder: (context) => HomeScreen()),
+    //     (route) => false);
   }
-
-  // handling email and password sign in
-//   void handleEmailSignUp(String email, String password) async {
-//     final sp = context.read<SignInProvider>();
-//     final ip = context.read<InternetProvider>();
-//     await ip.checkInternetConnection();
-
-//     if (ip.hasInternet == false) {
-//       openSnackbar(context, "Check your Internet connection", Colors.red);
-//     } else {
-//       await sp.signInWithEmail(email, password).then((value) {
-//         if (sp.hasError == true && !_formKey.currentState!.validate()) {
-//           openSnackbar(context, sp.errorCode.toString(), Colors.red);
-//           //googleController.reset();
-//         } else {
-//           // checking whether user exists or not
-//           sp.checkUserExists().then((value) async {
-//             if (value == true) {
-//               // user exists
-//               await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
-//                   .saveDataToSharedPreferences()
-//                   .then((value) => sp.setSignIn().then((value) {
-//                         //googleController.success();
-//                         handleAfterSignIn();
-//                       })));
-//             } else {
-//               // user does not exist
-//               sp.saveDataToFirestore().then((value) => sp
-//                   .saveDataToSharedPreferences()
-//                   .then((value) => sp.setSignIn().then((value) {
-//                         //googleController.success();
-//                         handleAfterSignIn();
-//                       })));
-//             }
-//           });
-//         }
-//       });
-//     }
-//   }
-
-// // handle after signin
-//   handleAfterSignIn() {
-  //   Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-  //     nextScreenReplace(context, const HomeScreen());
-  //   });
-  // }
 }
