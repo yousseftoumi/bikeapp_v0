@@ -2,6 +2,7 @@ import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 // import 'package:bikeapp_v0/screens/login_screen.dart';
 import 'package:bikeapp_v0/screens/splash_screen.dart';
+import 'package:bikeapp_v0/utils/config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           create: ((context) => InternetProvider()),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
+        theme: ThemeData(fontFamily: "Varela_Round"),
         home: SplashScreen(),
         debugShowCheckedModeBanner: false,
       ),

@@ -275,8 +275,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Wrap(
                             children: const [
                               Icon(
-                                FontAwesomeIcons.phone,
-                                size: 20,
+                                Icons.phone,
+                                size: 23,
                                 color: Colors.white,
                               ),
                               SizedBox(

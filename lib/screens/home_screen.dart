@@ -196,25 +196,45 @@ class _HomeScreenState extends State<HomeScreen>
       body: Column(
         children: [
           Container(
-            child: TabBar(
-              isScrollable: true,
-              indicatorPadding: EdgeInsets.all(10),
-              labelPadding:
-                  EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-              labelColor: Colors.black,
-              labelStyle: TextStyle(fontSize: 20),
-              indicator: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: Text(
+                  "Choisir votre vélo",
+                  style: TextStyle(
+                    color: kTextColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 23,
+                  ),
+                ),
               ),
-              controller: _tabController,
-              tabs: [
-                Text('Favorite'),
-                Text('Electric'),
-                Text('Classic'),
-              ],
-            ),
-          ),
+              TabBar(
+                isScrollable: true,
+                indicatorPadding: EdgeInsets.all(10),
+                labelPadding:
+                    EdgeInsets.only(left: 19, right: 19, top: 10, bottom: 10),
+                labelColor: kTextColor,
+                labelStyle: TextStyle(fontSize: 20),
+                indicator: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                controller: _tabController,
+                tabs: [
+                  Text(
+                    'Favoris',
+                    style: TextStyle(fontFamily: 'Varela_Round'),
+                  ),
+                  Text('Classique',
+                      style: TextStyle(fontFamily: 'Varela_Round')),
+                  Text('Électrique',
+                      style: TextStyle(fontFamily: 'Varela_Round')),
+                ],
+              ),
+            ],
+          )),
           Expanded(
             child: TabBarView(controller: _tabController, children: [
               CardWidget(),
