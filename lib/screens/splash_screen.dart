@@ -41,5 +41,21 @@ class _SplashScreenState extends State<SplashScreen> {
         )),
       ),
     );
+    // return Scaffold(
+    //   body: SplashScreen(
+    //       seconds: 5,
+    //       title: new Text(
+    //         'Welcome Back',
+    //         style: new TextStyle(
+    //             fontWeight: FontWeight.bold,
+    //             fontSize: 20.0,
+    //             color: Colors.white),
+    //       ),
+    //       image: new Image.asset(Config.app_icon),
+    //       photoSize: 200.0,
+    //       backgroundColor: Colors.white,
+    //       styleTextUnderTheLoader: new TextStyle(),
+    //       loaderColor: Colors.blue),
+    // );
   }
 }

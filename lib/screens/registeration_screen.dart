@@ -4,6 +4,7 @@ import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/home_screen.dart';
 import 'package:bikeapp_v0/screens/login_screen.dart';
+import 'package:bikeapp_v0/screens/verifyemail_screen.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:bikeapp_v0/utils/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -100,7 +101,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           }
           if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
               .hasMatch(value)) {
-            return ("Veuillez saisir un email valid ! ");
+            return ("Veuillez saisir un email valide ! ");
           }
           return null;
         },
@@ -304,23 +305,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
               .saveDataToSharedPreferences()
               .then((value) => sp.setSignIn().then((value) {
-                    nextScreenReplace(context, const HomeScreen());
+                    nextScreenReplace(context, const VerifyScreen());
                   })));
         } else {
           // user does not exist
           await sp.saveDataToFirestore().then((value) => sp
               .saveDataToSharedPreferences()
               .then((value) => sp.setSignIn().then((value) {
-                    nextScreenReplace(context, const HomeScreen());
+                    nextScreenReplace(context, const VerifyScreen());
                   })));
         }
       });
-      // await _auth
-      //     .createUserWithEmailAndPassword(email: email, password: password)
-      //     .then((value) => {postDetailsToFirestore()})
-      //     .catchError((e) {
-      //   Fluttertoast.showToast(msg: e!.message);
-      // });
     }
   }
 

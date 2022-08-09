@@ -2,6 +2,7 @@ import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/home_screen.dart';
 import 'package:bikeapp_v0/screens/phoneauth_screen.dart';
+import 'package:bikeapp_v0/screens/verifyemail_screen.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:bikeapp_v0/utils/snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -459,7 +460,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // handle after signin
   handleAfterSignIn() {
     Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-      nextScreenReplace(context, const HomeScreen());
+      nextScreenReplace(context, const VerifyScreen());
     });
   }
 }

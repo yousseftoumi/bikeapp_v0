@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen>
               isScrollable: true,
               indicatorPadding: EdgeInsets.all(10),
               labelPadding:
-                  EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+                  EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
               labelColor: Colors.black,
               labelStyle: TextStyle(fontSize: 20),
               indicator: BoxDecoration(
