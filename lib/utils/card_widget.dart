@@ -8,13 +8,13 @@ class CardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GridView.builder(
-        itemCount: 6,
+        itemCount: 10,
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (context, index) {
           return Card(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(60)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(48)),
             child: Column(
               children: [
                 Image.asset(
@@ -26,7 +26,7 @@ class CardWidget extends StatelessWidget {
                   'VTT ST 50',
                   style: TextStyle(),
                 ),
-                Text('40\$ - 1km')
+                Text('1 Dhs/Km'),
               ],
             ),
           );

@@ -8,7 +8,7 @@ class Config {
       "1eJOsBMqbI5HGjVAH7KNWkJsGgD44EHMFsZrqb1ne5nfYSwhBW";
 }
 
-const kTextColor = Color.fromARGB(255, 35, 150, 217);
+const kTextColor = Color.fromRGBO(56, 182, 255, 1);
 const kTextLightColor = Color.fromARGB(255, 171, 185, 196);
 
 const kDefaultPaddin = 20.0;
