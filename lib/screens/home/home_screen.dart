@@ -5,6 +5,7 @@ import 'package:bikeapp_v0/screens/auth/registeration_screen.dart';
 import 'package:bikeapp_v0/screens/home/accueil_screen.dart';
 import 'package:bikeapp_v0/screens/home/favoris_screen.dart';
 import 'package:bikeapp_v0/screens/home/map_screen.dart';
+import 'package:bikeapp_v0/screens/home/notifications_screen.dart';
 import 'package:bikeapp_v0/screens/home/profile_screen.dart';
 import 'package:bikeapp_v0/screens/types.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     FavorisScreen(),
     MapScreen(),
     Profilescreen(),
+    NotificationsScreen(),
   ];
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
@@ -184,19 +186,18 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 80,
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.blue),
+        iconTheme: IconThemeData(color:kTextColor),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomRight: Radius.circular(35)),
         ),
         actions: [
           TextButton.icon(
-            style: TextButton.styleFrom(primary: Colors.blue),
+            style: TextButton.styleFrom(primary: kTextColor),
             onPressed: () {
-              sp.userSignOut();
-              nextScreenReplace(context, LoginScreen());
+              //nextScreen(context, NotificationsScreen());
             },
-            icon: Icon(Icons.exit_to_app_sharp),
-            label: Text('LogOut'),
+            icon: Icon(Icons.notifications),
+            label: Text(''),
           ),
         ],
       ),
