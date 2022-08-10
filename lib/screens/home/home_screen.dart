@@ -6,7 +6,7 @@ import 'package:bikeapp_v0/screens/home/accueil_screen.dart';
 import 'package:bikeapp_v0/screens/home/favoris_screen.dart';
 import 'package:bikeapp_v0/screens/home/map_screen.dart';
 import 'package:bikeapp_v0/screens/home/notifications_screen.dart';
-import 'package:bikeapp_v0/screens/home/profile_screen.dart';
+import 'package:bikeapp_v0/screens/profile/profile_screen.dart';
 import 'package:bikeapp_v0/screens/types.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:bikeapp_v0/screens/home/navbar_screen.dart';
@@ -186,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 80,
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color:kTextColor),
+        iconTheme: IconThemeData(color: kTextColor),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomRight: Radius.circular(35)),
         ),
@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
           TextButton.icon(
             style: TextButton.styleFrom(primary: kTextColor),
             onPressed: () {
-              //nextScreen(context, NotificationsScreen());
+              nextScreen(context, NotificationsScreen());
             },
             icon: Icon(Icons.notifications),
             label: Text(''),
