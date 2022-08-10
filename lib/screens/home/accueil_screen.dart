@@ -44,8 +44,8 @@ class _AccueilScreenState extends State<AccueilScreen>
               indicatorPadding: EdgeInsets.all(10),
               labelPadding:
                   EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 10),
-              labelColor: kTextColor,
-              labelStyle: TextStyle(fontSize: 20),
+              labelColor: Colors.black,
+              labelStyle: TextStyle(fontSize: 18),
               indicator: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
