@@ -1,4 +1,5 @@
 import 'package:bikeapp_v0/screens/auth/login_screen.dart';
+import 'package:bikeapp_v0/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
@@ -14,6 +15,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  // bool tappedYes = false;
   Future getData() async {
     final sp = context.read<SignInProvider>();
     sp.getDataFromSharedPreferences();
@@ -48,7 +50,7 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: kTextColor,
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
@@ -107,9 +109,16 @@ class _NavBarState extends State<NavBar> {
           ListTile(
               title: Text('Se déconnecter'),
               leading: Icon(Icons.exit_to_app),
-              onTap: () {
-                sp.userSignOut();
-                nextScreenReplace(context, const LoginScreen());
+              onTap: () async {
+                final action = await AlertDialogs.yesCancelDialog(
+                    context, 'Se déconnecter', 'Êtes vous sûr ?');
+                if (action == DialogsAction.Oui) {
+                  sp.userSignOut();
+                  nextScreenReplace(context, const LoginScreen());
+                  // setState(() => tappedYes = true);
+                } else {
+                  // setState(() => tappedYes = false);
+                }
               }),
         ],
       ),
