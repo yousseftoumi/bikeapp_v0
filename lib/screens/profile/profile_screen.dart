@@ -1,6 +1,8 @@
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/auth/login_screen.dart';
 import 'package:bikeapp_v0/screens/home/notifications_screen.dart';
+import 'package:bikeapp_v0/screens/home/parametres_screen.dart';
+import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +72,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                 ],
               ),
             ),
-            SizedBox(height: 3),
+            SizedBox(height: 5),
             Text(
               "${sp.name}",
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -78,9 +80,11 @@ class _ProfilescreenState extends State<Profilescreen> {
             Text("${sp.email}"),
             SizedBox(height: 20),
             ProfileMenu(
-              text: "My Account",
+              text: "Mon Profil",
               icon: Icon(Icons.person),
-              press: () => {},
+              press: () {
+                nextScreen(context, EditProfile());
+              },
             ),
             ProfileMenu(
               text: "Notifications",
@@ -90,9 +94,11 @@ class _ProfilescreenState extends State<Profilescreen> {
               },
             ),
             ProfileMenu(
-              text: "Settings",
+              text: "Paramètres",
               icon: Icon(Icons.settings),
-              press: () {},
+              press: () {
+                nextScreen(context, ParametresScreen());
+              },
             ),
             ProfileMenu(
               text: "Help Center",
