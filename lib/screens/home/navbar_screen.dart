@@ -1,4 +1,6 @@
 import 'package:bikeapp_v0/screens/auth/login_screen.dart';
+import 'package:bikeapp_v0/screens/home/parametres_screen.dart';
+import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:bikeapp_v0/model/user_model.dart';
@@ -57,15 +59,18 @@ class _NavBarState extends State<NavBar> {
                     'https://hdwallpaperim.com/wp-content/uploads/2017/08/24/99743-bicycle-simple_background.jpg'),
               ),
             ),
+            onDetailsPressed: () {
+              nextScreen(context, EditProfile());
+            },
           ),
           ListTile(
             leading: Icon(Icons.favorite),
-            title: Text('Favorites'),
+            title: Text('Favoris'),
             onTap: () => null,
           ),
           ListTile(
             leading: Icon(Icons.person),
-            title: Text('Friends'),
+            title: Text('Amis'),
             onTap: () => null,
           ),
           ListTile(
@@ -75,7 +80,7 @@ class _NavBarState extends State<NavBar> {
           ),
           ListTile(
             leading: Icon(Icons.notifications),
-            title: Text('Request'),
+            title: Text('Notifications'),
             onTap: () => null,
             trailing: ClipOval(
               child: Container(
@@ -97,8 +102,8 @@ class _NavBarState extends State<NavBar> {
           Divider(),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => null,
+            title: Text('Paramètres'),
+            onTap: () => nextScreen(context, ParametresScreen()),
           ),
           ListTile(
             leading: Icon(Icons.description),

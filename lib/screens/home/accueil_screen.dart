@@ -29,7 +29,7 @@ class _AccueilScreenState extends State<AccueilScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 4),
               child: Text(
                 "Choisir votre vélo",
                 style: TextStyle(
@@ -41,14 +41,14 @@ class _AccueilScreenState extends State<AccueilScreen>
             ),
             TabBar(
               isScrollable: true,
-              indicatorPadding: EdgeInsets.all(10),
+              indicatorPadding: EdgeInsets.all(0),
               labelPadding:
-                  EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 10),
+                  EdgeInsets.only(left: 18, right: 18, top: 5, bottom: 5),
               labelColor: Colors.black,
-              labelStyle: TextStyle(fontSize: 18),
+              labelStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
               indicator: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
               ),
               controller: _tabController,
               tabs: [

@@ -215,7 +215,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.blueAccent),
+          icon: Icon(Icons.arrow_back, color: kTextColor),
           onPressed: () {
             //passing this to our root
             Navigator.of(context).pop();
