@@ -47,28 +47,28 @@ class _ProfilescreenState extends State<Profilescreen> {
                   CircleAvatar(
                     backgroundImage: NetworkImage("${sp.image_url}"),
                   ),
-                  Positioned(
-                    right: -16,
-                    bottom: 0,
-                    child: SizedBox(
-                      height: 46,
-                      width: 46,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            side: BorderSide(color: Colors.white),
-                          ),
-                          primary: Colors.grey,
-                          backgroundColor: Colors.white,
-                        ),
-                        onPressed: () {
-                          //change profile picture
-                        },
-                        child: Icon(Icons.camera_alt),
-                      ),
-                    ),
-                  )
+                  // Positioned(
+                  //   right: -16,
+                  //   bottom: 0,
+                  //   child: SizedBox(
+                  //     height: 46,
+                  //     width: 46,
+                  //     child: TextButton(
+                  //       style: TextButton.styleFrom(
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(50),
+                  //           side: BorderSide(color: Colors.white),
+                  //         ),
+                  //         primary: Colors.grey,
+                  //         backgroundColor: Colors.white,
+                  //       ),
+                  //       onPressed: () {
+                  //         //change profile picture
+                  //       },
+                  //       child: Icon(Icons.camera_alt),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),

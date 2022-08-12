@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:bikeapp_v0/model/user_model.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/utils/config.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +17,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   bool _obscureText = true;
-
+  User? user;
   final _auth = FirebaseAuth.instance;
   // our form key
   final _formKey = GlobalKey<FormState>();
@@ -30,7 +32,6 @@ class _EditProfileState extends State<EditProfile> {
     sp.getDataFromSharedPreferences();
     emailEditingController.text = "${sp.email}";
     nameEditingController.text = "${sp.name}";
-
   }
 
   @override
@@ -43,6 +44,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     final sp = context.watch<SignInProvider>();
+    //name field
     final nameField = TextFormField(
         autofocus: false,
         controller: nameEditingController,
@@ -62,20 +64,21 @@ class _EditProfileState extends State<EditProfile> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
+          // prefixIcon: Icon(Icons.account_circle),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           // hintText: "Nom",
           labelText: 'Nom',
-          labelStyle: TextStyle(color: Colors.blue),
+          labelStyle: TextStyle(color: Colors.blueAccent),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
-//email field
+    //email field
     final emailField = TextFormField(
+        enabled: false,
         autofocus: false,
         controller: emailEditingController,
-        style: TextStyle(fontSize: 14),
+        // style: TextStyle(fontSize: 14),
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
           if (value!.isEmpty) {
@@ -92,16 +95,17 @@ class _EditProfileState extends State<EditProfile> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
+          // prefixIcon: Icon(Icons.mail),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           //hintText: ,
           //hintStyle: TextStyle(fontSize: 10),
-          // labelText: 'Email',
-          labelStyle: TextStyle(color: Colors.blue),
+          labelText: 'Email',
+          labelStyle: TextStyle(color: Colors.blueAccent),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
+
     // save button
     final saveButton = Material(
       elevation: 5,
@@ -110,14 +114,56 @@ class _EditProfileState extends State<EditProfile> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {},
+          onPressed: () async {
+            user = _auth.currentUser!;
+            final docUser =
+                FirebaseFirestore.instance.collection('users').doc(user!.uid);
+            docUser.update({'name': nameEditingController.text});
+            await user?.reload();
+            user = await _auth.currentUser!;
+          },
           child: Text(
             "Enregistrer",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.5),
           )),
     );
+    // saveProfilePicture() async {
+    //   _formKey.currentState.save();
+    //   if (_formKey.currentState.validate() && !_isLoading) {
+    //     setState(() {
+    //       _isLoading = true;
+    //     });
+    //     String profilePictureUrl = '';
+    //     String coverPictureUrl = '';
+    //     if (_profileImage == null) {
+    //       profilePictureUrl = widget.user.profilePicture;
+    //     } else {
+    //       profilePictureUrl = await StorageService.uploadProfilePicture(
+    //           widget.user.profilePicture, _profileImage);
+    //     }
+    //     if (_coverImage == null) {
+    //       coverPictureUrl = widget.user.coverImage;
+    //     } else {
+    //       coverPictureUrl = await StorageService.uploadCoverPicture(
+    //           widget.user.coverImage, _coverImage);
+    //     }
+    //     UserModel user = UserModel(
+    //       id: widget.user.id,
+    //       name: _name,
+    //       profilePicture: profilePictureUrl,
+    //       bio: _bio,
+    //       coverImage: coverPictureUrl,
+    //     );
+
+    //     DatabaseServices.updateUserData(user);
+    //     Navigator.pop(context);
+    //   }
+    // }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -126,7 +172,10 @@ class _EditProfileState extends State<EditProfile> {
         elevation: 0,
         title: Text(
           "Modifier mon profil",
-          style: TextStyle(color: kTextColor, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              color: kTextColor,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.1),
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: kTextColor),
@@ -135,52 +184,57 @@ class _EditProfileState extends State<EditProfile> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(36),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 115,
-              width: 115,
-              child: Stack(
-                fit: StackFit.expand,
-                clipBehavior: Clip.none,
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage("${sp.image_url}"),
-                  ),
-                  Positioned(
-                    right: -16,
-                    bottom: 0,
-                    child: SizedBox(
-                      height: 46,
-                      width: 46,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            side: BorderSide(color: Colors.white),
-                          ),
-                          primary: Colors.grey,
-                          backgroundColor: Colors.white,
-                        ),
-                        onPressed: () {
-                          //change profile picture
-                        },
-                        child: Icon(Icons.camera_alt),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(36),
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 115,
+                  width: 115,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    clipBehavior: Clip.none,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage("${sp.image_url}"),
                       ),
-                    ),
-                  )
-                ],
-              ),
+                      Positioned(
+                        right: -16,
+                        bottom: 0,
+                        child: SizedBox(
+                          height: 46,
+                          width: 46,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                                side: BorderSide(color: Colors.white),
+                              ),
+                              primary: kTextColor,
+                              backgroundColor: Colors.grey[200],
+                            ),
+                            onPressed: () {
+                              // saveProfilePicture();
+                            },
+                            child: Icon(Icons.edit),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 35),
+                nameField,
+                SizedBox(height: 25),
+                emailField,
+                SizedBox(height: 30),
+                saveButton,
+              ],
             ),
-            SizedBox(height: 35),
-            nameField,
-            SizedBox(height: 10),
-            emailField,
-            SizedBox(height: 20),
-            saveButton,
-          ],
+          ),
         ),
       ),
     );
