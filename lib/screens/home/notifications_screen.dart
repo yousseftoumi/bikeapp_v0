@@ -16,21 +16,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       drawer: NavBar(),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          "Notifications",
-          style: TextStyle(color: kTextColor),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: kTextColor),
-          onPressed: () {
-            //passing this to our root
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+      appBar: app_bar(context, "Notifications"),
       body: Center(child: Text("Notifications")),
     );
   }
