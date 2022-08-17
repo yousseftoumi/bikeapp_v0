@@ -6,6 +6,41 @@ class Config {
   // static final apikey_twitter = "9Feip53jOk8esDtSM6w08d3XT";
   // static final secretkey_twitter =
   //     "1eJOsBMqbI5HGjVAH7KNWkJsGgD44EHMFsZrqb1ne5nfYSwhBW";
+
+  static final darkTheme = ThemeData(
+    //backgroundColor: Color(0xff212E52),
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: Color(0xff212E52),
+    primaryColor: Colors.black,
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: Color.fromARGB(255, 8, 34, 50), brightness: Brightness.dark),
+    fontFamily: "Varela_Round",
+    iconTheme: IconThemeData(color: Colors.white, opacity: 1),
+  );
+
+  static final lightTheme = ThemeData(
+    //backgroundColor: Colors.blueAccent,
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: Colors.white,
+    primaryColor: Colors.white,
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: Color.fromRGBO(56, 182, 255, 1),
+        brightness: Brightness.light,
+        primary: Colors.blueAccent),
+    fontFamily: "Varela_Round",
+    iconTheme:
+        const IconThemeData(color: Color.fromRGBO(56, 182, 255, 1), opacity: 1),
+  );
+}
+
+class ThemeProvider extends ChangeNotifier {
+  ThemeMode themeMode = ThemeMode.system;
+
+  bool get isDarkMode => themeMode == ThemeMode.dark;
+  void toggleTheme(bool isOn) {
+    themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
+  }
 }
 
 const kTextColor = Color.fromRGBO(56, 182, 255, 1);
@@ -16,14 +51,13 @@ const kDefaultPaddin = 20.0;
 
 AppBar app_bar(BuildContext context, String title) {
   return AppBar(
-    backgroundColor: Colors.white,
+    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+    iconTheme: Theme.of(context).iconTheme,
     elevation: 0,
-    title: Text(
-      title,
-      style: TextStyle(color: kTextColor),
-    ),
+    title:
+        Text(title, style: TextStyle(color: Theme.of(context).iconTheme.color)),
     leading: IconButton(
-      icon: Icon(Icons.arrow_back, color: kTextColor),
+      icon: Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
       onPressed: () {
         Navigator.of(context).pop();
       },
@@ -52,15 +86,19 @@ class AlertDialogs {
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(DialogsAction.Annuler),
               child: Text(
-                'Cancel',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                'Annuler',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor),
               ),
             ),
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(DialogsAction.Oui),
               child: Text(
-                'Confirm',
-                style: TextStyle(fontWeight: FontWeight.w700),
+                'Confirmer',
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor),
               ),
             )
           ],

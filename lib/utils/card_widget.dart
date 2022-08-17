@@ -12,7 +12,7 @@ class CardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GridView.builder(
-        itemCount: 4,
+        itemCount: 8,
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (context, index) {
@@ -21,9 +21,12 @@ class CardWidget extends StatelessWidget {
             GestureDetector(
               onTap: () => nextScreen(context, BikeDetailsScreen()),
               child: Card(
+                color: Theme.of(context).iconTheme.color,
+                
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(48)),
+                    borderRadius: BorderRadius.circular(20)),
                 child: Column(
+                  
                   children: [
                     Image.asset(
                       Config.app_icon,
@@ -32,9 +35,10 @@ class CardWidget extends StatelessWidget {
                     ),
                     Text(
                       'Umbro',
-                      style: TextStyle(),
+                      style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor,fontSize: 17,fontWeight: FontWeight.bold),
                     ),
-                    Text('1 Dhs/Km'),
+                    SizedBox(height: 4,),
+                    Text('1 Dhs/Km',style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
                   ],
                 ),
               ),
@@ -51,8 +55,8 @@ class CardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       side: BorderSide(color: Colors.white),
                     ),
-                    primary: Colors.white,
-                    backgroundColor: kTextColor,
+                    primary:Theme.of(context).iconTheme.color,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   onPressed: () {},
                   child: Row(children: [

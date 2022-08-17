@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/config.dart';
 
@@ -21,7 +22,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
               children: [
                 Icon(
                   Icons.person,
-                  color: kTextColor,
+                  //color: kTextColor,
                 ),
                 SizedBox(
                   width: 8,
@@ -50,8 +51,47 @@ class _ParametresScreenState extends State<ParametresScreen> {
             Row(
               children: [
                 Icon(
+                  Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? Icons.nightlight : Icons.wb_sunny,
+                  //color: kTextColor,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Affichage",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Divider(
+              height: 15,
+              thickness: 2,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            // buildNotificationOptionRow("Dark mode", false),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Dark Mode",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                ChangeThemeSwitch(),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Icon(
                   Icons.volume_up_outlined,
-                  color: kTextColor,
+                  //color: kTextColor,
                 ),
                 SizedBox(
                   width: 8,
@@ -75,15 +115,21 @@ class _ParametresScreenState extends State<ParametresScreen> {
             SizedBox(
               height: 50,
             ),
-            
             Column(
               children: [
                 Text(
-              "Bike App v1.3.5",
-              style: TextStyle(fontSize: 10, color: Colors.grey[600]),
-            ),
-                Text("Made in Casablanca",
-                  style: TextStyle(fontSize: 10, color: Colors.grey[600]),
+                  "Bike App v1.3.5",
+                  style: TextStyle(
+                    fontSize: 10,
+                    // color: Colors.grey[600]
+                  ),
+                ),
+                Text(
+                  "Made in Casablanca",
+                  style: TextStyle(
+                    fontSize: 10,
+                    //color: Colors.grey[600]
+                  ),
                 ),
               ],
             ),
@@ -97,7 +143,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
                 onPressed: () {},
                 child: Text("SIGN OUT",
                     style: TextStyle(
-                        fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
+                        fontSize: 16, letterSpacing: 2.2)),
               ),
             ),
             SizedBox(height: 20)
@@ -114,9 +160,10 @@ class _ParametresScreenState extends State<ParametresScreen> {
         Text(
           title,
           style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600]),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            //color: Colors.grey[600]
+          ),
         ),
         Transform.scale(
             scale: 0.7,
@@ -164,7 +211,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
+                //color: Colors.grey[600],
               ),
             ),
             Icon(
@@ -174,6 +221,22 @@ class _ParametresScreenState extends State<ParametresScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ChangeThemeSwitch extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return Transform.scale(
+      scale: 0.7,
+      child: CupertinoSwitch(
+          value: themeProvider.isDarkMode,
+          onChanged: (value) {
+            final provider = Provider.of<ThemeProvider>(context, listen: false);
+            provider.toggleTheme(value);
+          }),
     );
   }
 }

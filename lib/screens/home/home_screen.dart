@@ -179,20 +179,21 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: null,
       drawer: NavBar(),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Image.asset(
           'assets/bikeAppLogo.png',
           width: 80,
           height: 80,
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: kTextColor),
+        iconTheme: Theme.of(context).iconTheme,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomRight: Radius.circular(35)),
         ),
         actions: [
           TextButton.icon(
-            style: TextButton.styleFrom(primary: kTextColor),
+            style: TextButton.styleFrom(
+                primary: Theme.of(context).iconTheme.color),
             onPressed: () {
               nextScreen(context, NotificationsScreen());
             },
@@ -207,6 +208,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          selectedItemColor: Theme.of(context).iconTheme.color,
+          //unselectedItemColor: Theme.of(context).primaryIconTheme.color,
           showUnselectedLabels: false,
           onTap: (index) {
             setState(() {

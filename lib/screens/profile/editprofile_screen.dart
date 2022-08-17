@@ -110,7 +110,7 @@ class _EditProfileState extends State<EditProfile> {
     final saveButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.blueAccent,
+      color: Theme.of(context).iconTheme.color,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -127,7 +127,7 @@ class _EditProfileState extends State<EditProfile> {
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5),
           )),
@@ -166,24 +166,8 @@ class _EditProfileState extends State<EditProfile> {
     // }
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          "Modifier mon profil",
-          style: TextStyle(
-              color: kTextColor,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.1),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: kTextColor),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: app_bar(context, "Modifier mon profil"),
       body: Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(36),
@@ -213,7 +197,7 @@ class _EditProfileState extends State<EditProfile> {
                                 borderRadius: BorderRadius.circular(50),
                                 side: BorderSide(color: Colors.white),
                               ),
-                              primary: kTextColor,
+                              primary: Theme.of(context).primaryColor,
                               backgroundColor: Colors.grey[200],
                             ),
                             onPressed: () {

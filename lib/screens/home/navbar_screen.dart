@@ -34,7 +34,9 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     final sp = context.watch<SignInProvider>();
     return Drawer(
+      
       child: ListView(
+        
         // Remove padding
         padding: EdgeInsets.zero,
         children: [

@@ -26,20 +26,36 @@ class MyApp extends StatelessWidget {
     //   ),
     //   home: const LoginScreen(),
     // );
+
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: ((context) => SignInProvider()),
-        ),
-        ChangeNotifierProvider(
-          create: ((context) => InternetProvider()),
-        ),
-      ],
-      child: MaterialApp(
-        theme: ThemeData(fontFamily: "Varela_Round"),
-        home: SplashScreen(),
-        debugShowCheckedModeBanner: false,
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(
+            create: ((context) => SignInProvider()),
+          ),
+          ChangeNotifierProvider(
+            create: ((context) => InternetProvider()),
+          ),
+          ChangeNotifierProvider(
+            create: ((context) => ThemeProvider()),
+          ),
+        ],
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            themeMode: themeProvider.themeMode,
+            theme: Config.lightTheme,
+            darkTheme: Config.darkTheme,
+            home: SplashScreen(),
+            debugShowCheckedModeBanner: false,
+          );
+        }
+        // child: MaterialApp(
+        //   themeMode: themeProvider.themeMode,
+        //   theme: Config.lightTheme,
+        //   darkTheme: Config.darkTheme,
+        //   home: SplashScreen(),
+        //   debugShowCheckedModeBanner: false,
+        // ),
+        );
   }
 }

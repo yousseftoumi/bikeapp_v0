@@ -44,10 +44,10 @@ class _AccueilScreenState extends State<AccueilScreen>
               indicatorPadding: EdgeInsets.all(0),
               labelPadding:
                   EdgeInsets.only(left: 18, right: 18, top: 5, bottom: 5),
-              labelColor: Colors.black,
+              labelColor: Theme.of(context).colorScheme.primary,
               labelStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
               indicator: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).primaryColorDark.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(10),
               ),
               controller: _tabController,

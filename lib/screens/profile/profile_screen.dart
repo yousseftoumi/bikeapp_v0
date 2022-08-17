@@ -142,11 +142,11 @@ class ProfileMenu extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.blue,
+          primary: Theme.of(context).iconTheme.color,
           padding: EdgeInsets.all(14),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
         ),
         onPressed: press,
         child: Row(
@@ -156,7 +156,7 @@ class ProfileMenu extends StatelessWidget {
             Expanded(
                 child: Text(
               text,
-              style: TextStyle(color: Colors.black54),
+              style: TextStyle(color:Theme.of(context).hintColor),
             )),
             Icon(Icons.arrow_forward_ios),
           ],

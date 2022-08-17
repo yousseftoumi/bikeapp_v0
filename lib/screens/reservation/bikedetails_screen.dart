@@ -18,7 +18,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
         body: Padding(
           padding: const EdgeInsets.fromLTRB(20, 32, 20, 20),
           child: Card(
-            color: Colors.white,
+            color:Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
             child: Padding(
@@ -100,9 +100,12 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     ],
                   ),
                   SizedBox(height: 10),
-                  const Center(
+                  Center(
                       child: Text(
-                          "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression")),
+                    "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression"
+                    // style: TextStyle(color: Theme.of(context).primaryColor)
+                  
+                  )),
                   const SizedBox(
                     height: 20,
                   ),
@@ -110,13 +113,19 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     width: MediaQuery.of(context).size.width,
                     height: 40,
                     child: ElevatedButton(
+                      
                         style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30))),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
                         onPressed: () {
                           // nextScreen(context, null);
                         },
-                        child: const Text("LOUER",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
+                        child: const Text(
+                          "LOUER",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )),
                   )
                 ],
               ),
