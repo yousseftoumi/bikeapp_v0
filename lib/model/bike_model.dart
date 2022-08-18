@@ -5,32 +5,38 @@ enum BikeType { classic, electric }
 class BikeModel {
   String? bid;
   BikeType? type;
+  String? brand;
   int? speed;
   String? description;
   int? range;
   double? rating;
   String? image;
+  String? currentStation;
 
   // BikeModel({this.bid, this.email, this.firstName, this.lastName});
   BikeModel(
       {this.bid,
       this.type,
+      this.brand,
       this.speed,
       this.description,
       this.range,
       this.rating,
-      this.image});
+      this.image,
+      this.currentStation});
 
   // receiving data from server
   factory BikeModel.fromMap(map) {
     return BikeModel(
       bid: map['bid'],
       type: map['type'],
+      brand: map['brand'],
       speed: map['speed'],
       description: map['description'],
       range: map['range'],
       rating: map['rating'],
       image: map['image'],
+      currentStation: map['currentStation'],
     );
   }
 
@@ -39,10 +45,12 @@ class BikeModel {
     return {
       'bid': bid,
       'type': type,
+      'brand': brand,
       'speed': speed,
       'description': description,
       'range': range,
       'rating': rating,
+      'currentStation': currentStation,
     };
   }
 }
