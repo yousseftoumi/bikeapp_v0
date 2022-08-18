@@ -211,21 +211,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: kTextColor),
-          onPressed: () {
-            //passing this to our root
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+      appBar: app_bar(context, "S'inscrire"),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(

@@ -101,12 +101,12 @@ class _ProfilescreenState extends State<Profilescreen> {
               },
             ),
             ProfileMenu(
-              text: "Help Center",
+              text: "Centre d'aide",
               icon: Icon(Icons.help),
               press: () {},
             ),
             ProfileMenu(
-              text: "Log Out",
+              text: "Se déconnecter",
               icon: Icon(Icons.exit_to_app),
               press: () async {
                 final action = await AlertDialogs.yesCancelDialog(
@@ -138,15 +138,19 @@ class ProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _darkMode =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Theme.of(context).iconTheme.color,
+          primary: _darkMode
+              ? Theme.of(context).scaffoldBackgroundColor
+              : kTextColor,
           padding: EdgeInsets.all(14),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
+          backgroundColor: _darkMode ? Colors.white : Colors.white,
         ),
         onPressed: press,
         child: Row(
@@ -156,7 +160,7 @@ class ProfileMenu extends StatelessWidget {
             Expanded(
                 child: Text(
               text,
-              style: TextStyle(color:Theme.of(context).hintColor),
+              style: TextStyle(color: _darkMode ? Colors.black : Colors.black),
             )),
             Icon(Icons.arrow_forward_ios),
           ],

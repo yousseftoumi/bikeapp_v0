@@ -33,12 +33,15 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     final sp = context.watch<SignInProvider>();
+    bool _darkMode =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Drawer(
-      
+      backgroundColor:
+          _darkMode ? Theme.of(context).scaffoldBackgroundColor : Colors.white,
       child: ListView(
-        
         // Remove padding
         padding: EdgeInsets.zero,
+
         children: [
           UserAccountsDrawerHeader(
             accountName: Text("${sp.name}"),
@@ -54,7 +57,7 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             decoration: BoxDecoration(
-              color: kTextColor,
+              // color: kTextColor,
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(

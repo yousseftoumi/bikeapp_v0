@@ -28,7 +28,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
                   width: 8,
                 ),
                 Text(
-                  "Account",
+                  "Compte",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -40,18 +40,20 @@ class _ParametresScreenState extends State<ParametresScreen> {
             SizedBox(
               height: 10,
             ),
-            buildAccountOptionRow(context, "Change password"),
-            buildAccountOptionRow(context, "Content settings"),
-            buildAccountOptionRow(context, "Social"),
-            buildAccountOptionRow(context, "Language"),
-            buildAccountOptionRow(context, "Privacy and security"),
+            buildAccountOptionRow(context, "Changer le mot de passe"),
+            buildAccountOptionRow(context, "Sociale"),
+            buildAccountOptionRow(context, "Langue"),
+            buildAccountOptionRow(context, "Sécurité et confidentialité"),
             SizedBox(
               height: 40,
             ),
             Row(
               children: [
                 Icon(
-                  Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark ? Icons.nightlight : Icons.wb_sunny,
+                  Provider.of<ThemeProvider>(context).themeMode ==
+                          ThemeMode.dark
+                      ? Icons.nightlight
+                      : Icons.wb_sunny,
                   //color: kTextColor,
                 ),
                 SizedBox(
@@ -75,7 +77,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Dark Mode",
+                  "Mode sombre",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -109,9 +111,8 @@ class _ParametresScreenState extends State<ParametresScreen> {
             SizedBox(
               height: 10,
             ),
-            buildNotificationOptionRow("New for you", true),
-            buildNotificationOptionRow("Account activity", true),
-            buildNotificationOptionRow("Opportunity", false),
+            // buildNotificationOptionRow("New for you", true),
+            buildNotificationOptionRow("Activité du compte", true),
             SizedBox(
               height: 50,
             ),
@@ -142,8 +143,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
                 ),
                 onPressed: () {},
                 child: Text("SIGN OUT",
-                    style: TextStyle(
-                        fontSize: 16, letterSpacing: 2.2)),
+                    style: TextStyle(fontSize: 16, letterSpacing: 2.2)),
               ),
             ),
             SizedBox(height: 20)

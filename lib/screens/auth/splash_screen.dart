@@ -32,6 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Center(
             child: Image(
@@ -44,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
           "Trouvez votre vélo idéal et découvrez la plus grande collection de pistes cyclables au monde.",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.blueGrey,
+            color: Theme.of(context).hintColor,
             fontSize: 15,
           ),
         )

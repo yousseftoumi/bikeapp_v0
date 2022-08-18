@@ -27,19 +27,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            nextScreenReplace(context, const LoginScreen());
-          },
-        ),
-      ),
+      appBar: app_bar(context, ''),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20),

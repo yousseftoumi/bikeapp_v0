@@ -43,6 +43,8 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    bool _darkMode =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     final sp = context.watch<SignInProvider>();
     //name field
     final nameField = TextFormField(

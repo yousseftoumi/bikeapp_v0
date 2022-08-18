@@ -1,5 +1,6 @@
 import 'package:bikeapp_v0/utils/card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/config.dart';
 
@@ -10,18 +11,21 @@ class AccueilScreen extends StatefulWidget {
   State<AccueilScreen> createState() => _AccueilScreenState();
 }
 
-class _AccueilScreenState extends State<AccueilScreen> 
-    with SingleTickerProviderStateMixin{
+class _AccueilScreenState extends State<AccueilScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0)
       ..addListener(() {});
   }
+
   @override
   Widget build(BuildContext context) {
+    bool _darkMode =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Column(
       children: [
         Container(
@@ -44,20 +48,25 @@ class _AccueilScreenState extends State<AccueilScreen>
               indicatorPadding: EdgeInsets.all(0),
               labelPadding:
                   EdgeInsets.only(left: 18, right: 18, top: 5, bottom: 5),
-              labelColor: Theme.of(context).colorScheme.primary,
-              labelStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+              labelColor: _darkMode
+                  ? Theme.of(context).scaffoldBackgroundColor
+                  : Theme.of(context).primaryColor,
+              labelStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
               indicator: BoxDecoration(
-                color: Theme.of(context).primaryColorDark.withOpacity(0.6),
+                color: Theme.of(context).primaryIconTheme.color,
                 borderRadius: BorderRadius.circular(10),
               ),
+              unselectedLabelColor: Theme.of(context).primaryIconTheme.color,
               controller: _tabController,
               tabs: [
                 Text(
                   'Favoris',
                   style: TextStyle(fontFamily: 'Varela_Round'),
                 ),
-                Text('Classique',
-                    style: TextStyle(fontFamily: 'Varela_Round')),
+                Text('Classique', style: TextStyle(fontFamily: 'Varela_Round')),
                 Text('Électrique',
                     style: TextStyle(fontFamily: 'Varela_Round')),
               ],
@@ -65,9 +74,7 @@ class _AccueilScreenState extends State<AccueilScreen>
           ],
         )),
         Expanded(
-          
-          child: TabBarView(controller: _tabController
-          , children: [
+          child: TabBarView(controller: _tabController, children: [
             CardWidget(),
             CardWidget(),
             CardWidget(),

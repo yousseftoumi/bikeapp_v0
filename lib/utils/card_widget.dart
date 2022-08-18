@@ -3,12 +3,15 @@ import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardWidget extends StatelessWidget {
   const CardWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool _darkMode =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GridView.builder(
@@ -21,12 +24,14 @@ class CardWidget extends StatelessWidget {
             GestureDetector(
               onTap: () => nextScreen(context, BikeDetailsScreen()),
               child: Card(
-                color: Theme.of(context).iconTheme.color,
-                
+                // shadowColor: Colors.black,
+                color: Provider.of<ThemeProvider>(context).themeMode ==
+                        ThemeMode.dark
+                    ? Theme.of(context).primaryIconTheme.color
+                    : Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(30)),
                 child: Column(
-                  
                   children: [
                     Image.asset(
                       Config.app_icon,
@@ -35,10 +40,22 @@ class CardWidget extends StatelessWidget {
                     ),
                     Text(
                       'Umbro',
-                      style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor,fontSize: 17,fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: _darkMode
+                              ? Theme.of(context).scaffoldBackgroundColor
+                              : Colors.black,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 4,),
-                    Text('1 Dhs/Km',style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text('1 Dhs/Km',
+                        style: TextStyle(
+                          color: _darkMode
+                              ? Theme.of(context).scaffoldBackgroundColor
+                              : Colors.black,
+                        )),
                   ],
                 ),
               ),
@@ -47,16 +64,18 @@ class CardWidget extends StatelessWidget {
               top: 0.0,
               child: SizedBox(
                 height: 30,
-                width: 64,
-                
                 child: TextButton(
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: Colors.white),
+                      //side: BorderSide(color: _darkMode ? Theme.of(context).scaffoldBackgroundColor : kTextColor),
                     ),
-                    primary:Theme.of(context).iconTheme.color,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    primary: _darkMode
+                        ? Theme.of(context).primaryIconTheme.color
+                        : Colors.white,
+                    backgroundColor: _darkMode
+                        ? Theme.of(context).scaffoldBackgroundColor
+                        : kTextColor,
                   ),
                   onPressed: () {},
                   child: Row(children: [
@@ -67,7 +86,8 @@ class CardWidget extends StatelessWidget {
                     SizedBox(width: 3),
                     Text(
                       "4,5",
-                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 14),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
                     )
                   ]),
                 ),

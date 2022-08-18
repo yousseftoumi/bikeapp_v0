@@ -12,8 +12,8 @@ class Config {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Color(0xff212E52),
     primaryColor: Colors.black,
-    colorScheme: ColorScheme.fromSeed(
-        seedColor: Color.fromARGB(255, 8, 34, 50), brightness: Brightness.dark),
+    // colorScheme: ColorScheme.fromSeed(
+    //     seedColor: Color.fromARGB(255, 8, 34, 50), brightness: Brightness.dark),
     fontFamily: "Varela_Round",
     iconTheme: IconThemeData(color: Colors.white, opacity: 1),
   );
@@ -21,12 +21,12 @@ class Config {
   static final lightTheme = ThemeData(
     //backgroundColor: Colors.blueAccent,
     brightness: Brightness.light,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Colors.grey[550],
     primaryColor: Colors.white,
-    colorScheme: ColorScheme.fromSeed(
-        seedColor: Color.fromRGBO(56, 182, 255, 1),
-        brightness: Brightness.light,
-        primary: Colors.blueAccent),
+    // colorScheme: ColorScheme.fromSeed(
+    //     seedColor: Color.fromRGBO(56, 182, 255, 1),
+    //     brightness: Brightness.light,
+    //     primary: Colors.blueAccent),
     fontFamily: "Varela_Round",
     iconTheme:
         const IconThemeData(color: Color.fromRGBO(56, 182, 255, 1), opacity: 1),
@@ -34,7 +34,7 @@ class Config {
 }
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.system;
+  ThemeMode themeMode = ThemeMode.dark;
 
   bool get isDarkMode => themeMode == ThemeMode.dark;
   void toggleTheme(bool isOn) {
