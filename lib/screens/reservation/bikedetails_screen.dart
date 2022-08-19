@@ -1,3 +1,5 @@
+import 'package:bikeapp_v0/model/bike_model.dart';
+import 'package:bikeapp_v0/screens/reservation/rental_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,8 @@ import 'package:provider/provider.dart';
 // import 'package:login_system/screens/location.dart';
 
 class BikeDetailsScreen extends StatefulWidget {
-  const BikeDetailsScreen({Key? key}) : super(key: key);
+  BikeModel bike;
+  BikeDetailsScreen({Key? key,required this.bike}) : super(key: key);
 
   @override
   State<BikeDetailsScreen> createState() => _BikeDetailsScreenState();
@@ -33,77 +36,24 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Image.asset(
-                      Config.app_icon,
-                      width: MediaQuery.of(context).size.width,
-                      height: 250,
-                    ),
+                    Image.network(widget.bike.image!),
+                    // Image.asset(
+                    //   Config.app_icon,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   height: 250,
+                    // ),
                     Row(
-                      children: const [
-                        Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Center(
-                              child: Text("18 mil",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            )),
-                        Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Center(
-                              child: Text("35 Km/h",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            )),
-                        Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Center(
-                              child: Text("4.8",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            )),
+                      children: [
+                        buildFlexible("${widget.bike.range!} mil"),
+                        buildFlexible("${widget.bike.speed!} Km/h"),
+                        buildFlexible("${widget.bike.rating!}"),
                       ],
                     ),
                     Row(
-                      children: const [
-                        Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Center(
-                              child: Text("Range",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            )),
-                        Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Center(
-                              child: Text("Speed",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            )),
-                        Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Center(
-                              child: Text("Rating",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            )),
+                      children: [
+                        buildFlexible("Range"),
+                        buildFlexible("Speed"),
+                        buildFlexible("Rating"),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -125,7 +75,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           onPressed: () {
-                            // nextScreen(context, null);
+                            nextScreen(context, RentalScreen(bike: widget.bike,));
                           },
                           child: const Text(
                             "LOUER",
@@ -165,3 +115,14 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
         ));
   }
 }
+Flexible buildFlexible(text) => Flexible(
+    flex: 1,
+    fit: FlexFit.tight,
+    child: Center(
+      child: Text(text, style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.white
+      )),
+    )
+  );
