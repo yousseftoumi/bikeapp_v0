@@ -1,4 +1,6 @@
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
+import 'package:bikeapp_v0/screens/admin/addbike_screen.dart';
+import 'package:bikeapp_v0/screens/admin/addstation_screen.dart';
 import 'package:bikeapp_v0/screens/auth/login_screen.dart';
 import 'package:bikeapp_v0/screens/home/notifications_screen.dart';
 import 'package:bikeapp_v0/screens/home/parametres_screen.dart';
@@ -103,7 +105,9 @@ class _ProfilescreenState extends State<Profilescreen> {
             ProfileMenu(
               text: "Centre d'aide",
               icon: Icon(Icons.help),
-              press: () {},
+              press: () {
+                nextScreen(context, AddStationScreen());
+              },
             ),
             ProfileMenu(
               text: "Se déconnecter",

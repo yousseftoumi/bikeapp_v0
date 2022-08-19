@@ -22,7 +22,7 @@ class CardWidget extends StatelessWidget {
           return Stack(//alignment: AlignmentDirectional.center,
               children: <Widget>[
             GestureDetector(
-              onTap: () => nextScreen(context, BikeDetailsScreen()),
+              // onTap: () => nextScreen(context, BikeDetailsScreen()),
               child: Card(
                 // shadowColor: Colors.black,
                 color: Provider.of<ThemeProvider>(context).themeMode ==
