@@ -44,8 +44,14 @@ class _NavBarState extends State<NavBar> {
 
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text("${sp.name}"),
-            accountEmail: Text("${sp.email}"),
+            accountName: Text(
+              "${sp.name}",
+              style: TextStyle(color: Colors.white),
+            ),
+            accountEmail: Text(
+              "${sp.email}",
+              style: TextStyle(color: Colors.white),
+            ),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(

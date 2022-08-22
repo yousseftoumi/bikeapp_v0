@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bikeapp_v0/utils/config.dart';
+
 import 'package:bikeapp_v0/screens/auth/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

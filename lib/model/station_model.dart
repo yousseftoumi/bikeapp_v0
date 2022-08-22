@@ -15,6 +15,6 @@ class Station {
     "id": id,
     "name": name,
     "address": address,
-    "nbBkies": nbBikes
+    "nbBikes": nbBikes
   };
 }

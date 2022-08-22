@@ -105,7 +105,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size.fromHeight(50),
                 ),
-                child: Text(
+                child: const Text(
                   "Annuler",
                   style: TextStyle(fontSize: 22),
                 ),

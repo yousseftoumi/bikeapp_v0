@@ -20,14 +20,17 @@ class _AddStationScreenState extends State<AddStationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: app_bar(context, "New Station"),
+      appBar: app_bar(context, "Nouvelle Station"),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Form(
             key: _formkey,
             child: ListView(
               children: [
-                const Text("Create new station"),
+                const Text(
+                  "Ajouter une nouvelle station",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -37,7 +40,7 @@ class _AddStationScreenState extends State<AddStationScreen> {
                   textInputAction: TextInputAction.next,
                   style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
-                      labelText: " Station Name ",
+                      labelText: "Nom du station ",
                       labelStyle: const TextStyle(fontSize: 16),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -49,11 +52,11 @@ class _AddStationScreenState extends State<AddStationScreen> {
                 ),
                 TextFormField(
                   controller: addressController,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 15),
                   decoration: InputDecoration(
-                      labelText: " Address ",
+                      labelText: " Addresse ",
                       labelStyle: const TextStyle(fontSize: 16),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -111,7 +114,7 @@ class _AddStationScreenState extends State<AddStationScreen> {
                               });
                             },
                             child: const Text(
-                              "Add Station",
+                              "Ajouter Station",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             )),

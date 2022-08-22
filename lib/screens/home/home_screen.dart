@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-
+//with RestorationMixin
 class _HomeScreenState extends State<HomeScreen> {
   int curIndex = 0;
   final screens = [
@@ -228,4 +228,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
     );
   }
+
+  // @override
+  // // TODO: implement restorationId
+  // String? get restorationId => throw "home_screen";
+
+  // @override
+  // void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+  //   // TODO: implement restoreState
+  // }
 }

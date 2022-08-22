@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
         builder: (context, _) {
           final themeProvider = Provider.of<ThemeProvider>(context);
           return MaterialApp(
+            // restorationScopeId: "root",
             themeMode: themeProvider.themeMode,
             theme: Config.lightTheme,
             darkTheme: Config.darkTheme,

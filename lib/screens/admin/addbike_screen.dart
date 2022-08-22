@@ -16,14 +16,14 @@ class AddBikeScreen extends StatefulWidget {
 
 class _AddBikeScreenState extends State<AddBikeScreen> {
   TextEditingController brandController = TextEditingController();
-  // TextEditingController modeleController = TextEditingController();
+  TextEditingController modelController = TextEditingController();
   TextEditingController typeController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController ratingController = TextEditingController();
   TextEditingController speedController = TextEditingController();
   TextEditingController rangeController = TextEditingController();
 
-  var biketypes = BikeType.values;
+  var biketypes = ['Classique', 'Éléctrique'];
 
   final formkey = GlobalKey<FormState>();
 
@@ -32,6 +32,7 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
   String? fileName;
   File? imageFile;
   String? stationName;
+  String? type;
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +74,52 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
                 fileName != null ? Text(fileName!) : const Text(""),
                 builTextFormField(brandController, TextInputType.text, 1, 1,
                     TextInputAction.next, "  Brand  "),
-                // builTextFormField(modeleController, TextInputType.text, 1, 1, TextInputAction.next, "  Modele  "),
-                builTextFormField(typeController, TextInputType.text, 1, 1,
-                    TextInputAction.next, "  Type  "),
+                // builTextFormField(modelController, TextInputType.text, 1, 1, TextInputAction.next, "  model  "),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Type",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          // width: MediaQuery.of(context).size.width / 2 - 40,
+                          // height: 40,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 0, vertical: 0),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                                value: type,
+                                items: biketypes.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(items),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    type = "$value";
+                                  });
+                                }),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 builTextFormField(ratingController, TextInputType.number, 1, 1,
                     TextInputAction.next, "  Rating  "),
                 builTextFormField(speedController, TextInputType.number, 1, 1,
@@ -99,7 +143,7 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
                           ),
                         ),
                         const SizedBox(
-                          width: 20,
+                          width: 00,
                         ),
                         Container(
                           // width: MediaQuery.of(context).size.width / 2 - 40,
@@ -116,6 +160,8 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
                                 List stations = snapshot.data as List;
                                 return DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                      itemHeight: null,
+                                      isExpanded: true,
                                       value: stationName,
                                       items: stations
                                           .map((station) => DropdownMenuItem(
@@ -197,8 +243,8 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
                                 BikeModel bike = BikeModel(
                                   bid: bikesRef.id,
                                   brand: brandController.text.trim(),
-                                  // modele: modeleController.text.trim(),
-                                  type: typeController.text=="Classique"?BikeType.classic:BikeType.electric,
+                                  model: modelController.text.trim(),
+                                  type: type,
                                   range: int.parse(rangeController.text.trim()),
                                   speed: int.parse(speedController.text.trim()),
                                   rating: double.parse(
@@ -213,7 +259,7 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
 
                                 setState(() {
                                   brandController.text = "";
-                                  // modeleController.text = "";
+                                  modelController.text = "";
                                   typeController.text = "";
                                   rangeController.text = "";
                                   speedController.text = "";
@@ -243,7 +289,7 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: TextFormField(
           validator: (value) =>
-              controller.text == "" ? "this field is required" : null,
+              controller.text == "" ? "This field is required" : null,
           minLines: minLines,
           maxLines: maxLines,
           keyboardType: keyboardType,

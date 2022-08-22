@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class BikeDetailsScreen extends StatefulWidget {
   BikeModel bike;
-  BikeDetailsScreen({Key? key,required this.bike}) : super(key: key);
+  BikeDetailsScreen({Key? key, required this.bike}) : super(key: key);
 
   @override
   State<BikeDetailsScreen> createState() => _BikeDetailsScreenState();
@@ -36,12 +36,18 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Image.network(widget.bike.image!),
                     // Image.asset(
                     //   Config.app_icon,
                     //   width: MediaQuery.of(context).size.width,
                     //   height: 250,
                     // ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         buildFlexible("${widget.bike.range!} mil"),
@@ -58,8 +64,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     ),
                     SizedBox(height: 10),
                     Center(
-                        child: Text(
-                            "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression"
+                        child: Text("${widget.bike.description!}"
                             // style: TextStyle(color: Theme.of(context).primaryColor)
 
                             )),
@@ -75,7 +80,11 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           onPressed: () {
-                            nextScreen(context, RentalScreen(bike: widget.bike,));
+                            nextScreen(
+                                context,
+                                RentalScreen(
+                                  bike: widget.bike,
+                                ));
                           },
                           child: const Text(
                             "LOUER",
@@ -94,7 +103,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        //side: BorderSide(color: _darkMode ? Theme.of(context).scaffoldBackgroundColor : kTextColor),
+                        side: BorderSide(color: Colors.white),
                       ),
                       primary: _darkMode
                           ? Theme.of(context).primaryIconTheme.color
@@ -105,7 +114,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     ),
                     onPressed: () {},
                     child: Text(
-                      "VTT ST 50",
+                      "${widget.bike.model!}",
                       style:
                           TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
                     )),
@@ -115,14 +124,11 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
         ));
   }
 }
+
 Flexible buildFlexible(text) => Flexible(
     flex: 1,
     fit: FlexFit.tight,
     child: Center(
-      child: Text(text, style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.white
-      )),
-    )
-  );
+      child: Text(text,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+    ));

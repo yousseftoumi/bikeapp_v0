@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-
 enum BikeType { classic, electric }
 
 class BikeModel {
   String? bid;
-  BikeType? type;
+  String? type;
   String? brand;
+  String? model;
   int? speed;
   String? description;
   int? range;
@@ -18,6 +17,7 @@ class BikeModel {
       {this.bid,
       this.type,
       this.brand,
+      this.model,
       this.speed,
       this.description,
       this.range,
@@ -31,6 +31,7 @@ class BikeModel {
       bid: map['bid'],
       type: map['type'],
       brand: map['brand'],
+      model: map['model'],
       speed: map['speed'],
       description: map['description'],
       range: map['range'],
@@ -46,6 +47,7 @@ class BikeModel {
       'bid': bid,
       'type': type,
       'brand': brand,
+      'model': model,
       'speed': speed,
       'description': description,
       'range': range,
@@ -58,42 +60,42 @@ class BikeModel {
 List<BikeModel> bikes = [
   BikeModel(
       bid: "1",
-      type: BikeType.classic,
+      type: "Classique",
       speed: 40,
       description: dummyText,
       image: "assets/bikeAppLogo.png",
       rating: 4.5),
   BikeModel(
       bid: "2",
-      type: BikeType.electric,
+      type: "Électrique",
       speed: 35,
       description: dummyText,
       image: "assets/bikeAppLogo.png",
       rating: 4.5),
   BikeModel(
       bid: "3",
-      type: BikeType.classic,
+      type: "Classique",
       speed: 40,
       description: dummyText,
       image: "assets/bikeAppLogo.png",
       rating: 4.5),
   BikeModel(
       bid: "4",
-      type: BikeType.classic,
+      type: "Classique",
       speed: 40,
       description: dummyText,
       image: "assets/bikeAppLogo.png",
       rating: 4.5),
   BikeModel(
       bid: "5",
-      type: BikeType.electric,
+      type: "Électrique",
       speed: 40,
       description: dummyText,
       image: "assets/bikeAppLogo.png",
       rating: 4.5),
   BikeModel(
       bid: "6",
-      type: BikeType.classic,
+      type: "Classique",
       speed: 40,
       description: dummyText,
       image: "assets/bikeAppLogo.png",

@@ -106,7 +106,7 @@ class _ProfilescreenState extends State<Profilescreen> {
               text: "Centre d'aide",
               icon: Icon(Icons.help),
               press: () {
-                nextScreen(context, AddStationScreen());
+                nextScreen(context, AddBikeScreen());
               },
             ),
             ProfileMenu(

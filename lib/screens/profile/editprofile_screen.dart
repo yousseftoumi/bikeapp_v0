@@ -205,7 +205,7 @@ class _EditProfileState extends State<EditProfile> {
                             onPressed: () {
                               // saveProfilePicture();
                             },
-                            child: Icon(Icons.edit),
+                            child: Icon(Icons.edit,color: Colors.black,),
                           ),
                         ),
                       )

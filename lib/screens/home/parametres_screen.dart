@@ -1,3 +1,5 @@
+import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
+import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,10 +42,10 @@ class _ParametresScreenState extends State<ParametresScreen> {
             SizedBox(
               height: 10,
             ),
-            buildAccountOptionRow(context, "Changer le mot de passe"),
-            buildAccountOptionRow(context, "Sociale"),
+            buildAccountOptionRow(context, "Mes informations"),
+            buildAccountOptionRow(context, "Mot de passe"),
+            buildAccountOptionRow(context, "Notifications"),
             buildAccountOptionRow(context, "Langue"),
-            buildAccountOptionRow(context, "Sécurité et confidentialité"),
             SizedBox(
               height: 40,
             ),
@@ -60,7 +62,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
                   width: 8,
                 ),
                 Text(
-                  "Affichage",
+                  "Apparence",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -72,7 +74,6 @@ class _ParametresScreenState extends State<ParametresScreen> {
             SizedBox(
               height: 10,
             ),
-            // buildNotificationOptionRow("Dark mode", false),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -92,14 +93,14 @@ class _ParametresScreenState extends State<ParametresScreen> {
             Row(
               children: [
                 Icon(
-                  Icons.volume_up_outlined,
+                  Icons.help,
                   //color: kTextColor,
                 ),
                 SizedBox(
                   width: 8,
                 ),
                 Text(
-                  "Notifications",
+                  "Support",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -112,7 +113,9 @@ class _ParametresScreenState extends State<ParametresScreen> {
               height: 10,
             ),
             // buildNotificationOptionRow("New for you", true),
-            buildNotificationOptionRow("Activité du compte", true),
+            buildAccountOptionRow(context, "J'ai besoin d'aide"),
+            buildAccountOptionRow(
+                context, "J'ai une question de confidentialité"),
             SizedBox(
               height: 50,
             ),
@@ -178,28 +181,30 @@ class _ParametresScreenState extends State<ParametresScreen> {
   GestureDetector buildAccountOptionRow(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(title),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("Option 1"),
-                    Text("Option 2"),
-                    Text("Option 3"),
-                  ],
-                ),
-                actions: [
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("Close")),
-                ],
-              );
-            });
+        // nextScreen(context, page);
+        // showDialog(
+
+        //     context: context,
+        //     builder: (BuildContext context) {
+        //       return AlertDialog(
+        //         title: Text(title),
+        //         content: Column(
+        //           mainAxisSize: MainAxisSize.min,
+        //           children: [
+        //             Text("Option 1"),
+        //             Text("Option 2"),
+        //             Text("Option 3"),
+        //           ],
+        //         ),
+        //         actions: [
+        //           FlatButton(
+        //               onPressed: () {
+        //                 Navigator.of(context).pop();
+        //               },
+        //               child: Text("Close")),
+        //         ],
+        //       );
+        //     });
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -216,7 +221,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: Colors.grey,
+              // color: Colors.grey,
             ),
           ],
         ),

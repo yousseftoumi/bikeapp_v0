@@ -16,7 +16,6 @@ class _AccueilScreenState extends State<AccueilScreen>
   late TabController _tabController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0)
       ..addListener(() {});
