@@ -37,14 +37,19 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(
-                    image: AssetImage(Config.app_icon), height: 50, width: 50),
+                Center(
+                  child: Image(
+                      image: AssetImage(Config.app_icon), height: 90, width: 90),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
+                Text(
                   "Phone Login",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).iconTheme.color),
                 ),
                 const SizedBox(
                   height: 10,
@@ -112,7 +117,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.phone),
-                      hintText: "+212663-648976",
+                      hintText: "+212 6 63648976",
                       hintStyle: TextStyle(color: Colors.grey[600]),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -131,9 +136,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   onPressed: () {
                     login(context, phoneController.text.trim());
                   },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent,
-                  ),
                   child: const Text("Register"),
                 )
               ],

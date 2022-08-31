@@ -3,7 +3,6 @@ import 'package:bikeapp_v0/screens/reservation/bikedetails_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +14,7 @@ class CardWidget extends StatelessWidget {
     bool _darkMode =
         Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6,horizontal: 4),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
       child: StreamBuilder(
         stream: readBikes(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -25,8 +24,8 @@ class CardWidget extends StatelessWidget {
             List bikes = snapshot.data as List<Map<String, dynamic>>;
             return GridView.builder(
               itemCount: bikes.length,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
               itemBuilder: (context, index) {
                 return Stack(//alignment: AlignmentDirectional.center,
                     children: <Widget>[
@@ -45,14 +44,17 @@ class CardWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
-                          Image.network(
-                            bikes[index]['image'],
-                            width: 150,
-                            height: 110,
-                            fit: BoxFit.scaleDown,
+                          Hero(
+                            tag: bikes[index]['bid'],
+                            child: Image.network(
+                              bikes[index]['image'],
+                              width: 150,
+                              height: 110,
+                              fit: BoxFit.scaleDown,
+                            ),
                           ),
                           Text(
                             "${bikes[index]['brand']}",
@@ -63,7 +65,7 @@ class CardWidget extends StatelessWidget {
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Text("${bikes[index]['speed']} Km/h",
@@ -96,14 +98,14 @@ class CardWidget extends StatelessWidget {
                         ),
                         onPressed: () {},
                         child: Row(children: [
-                          Icon(
+                          const Icon(
                             Icons.star,
                             size: 17,
                           ),
-                          SizedBox(width: 3),
+                          const SizedBox(width: 3),
                           Text(
                             "${bikes[index]['rating']}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 14),
                           )
                         ]),

@@ -33,14 +33,17 @@ class _RentalScreenState extends State<RentalScreen> {
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 250,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35),
-                  image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image: NetworkImage(widget.bike.image!))),
+            Hero(
+              tag: "bike",
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 250,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35),
+                    image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: NetworkImage(widget.bike.image!))),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

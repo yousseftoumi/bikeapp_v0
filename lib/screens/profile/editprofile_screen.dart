@@ -16,16 +16,16 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  bool _obscureText = true;
+  // bool _obscureText = true;
   User? user;
   final _auth = FirebaseAuth.instance;
   // our form key
   final _formKey = GlobalKey<FormState>();
   //editing Controller
-  final nameEditingController = new TextEditingController();
+  final nameEditingController = TextEditingController();
   // final secondNameEditingController = new TextEditingController();
-  final emailEditingController = new TextEditingController();
-  bool _isLoading = false;
+  final emailEditingController = TextEditingController();
+  // bool _isLoading = false;
 
   Future getData() async {
     final sp = context.read<SignInProvider>();
@@ -36,7 +36,6 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -52,7 +51,7 @@ class _EditProfileState extends State<EditProfile> {
         controller: nameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{3,}$');
+          RegExp regex = RegExp(r'^.{3,}$');
           if (value!.isEmpty) {
             return ("Veuillez saisir votre Nom ");
           }
@@ -67,10 +66,10 @@ class _EditProfileState extends State<EditProfile> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           // prefixIcon: Icon(Icons.account_circle),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           // hintText: "Nom",
           labelText: 'Nom',
-          labelStyle: TextStyle(color: Colors.blueAccent),
+          labelStyle: const TextStyle(color: Colors.blueAccent),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -98,11 +97,11 @@ class _EditProfileState extends State<EditProfile> {
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           // prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           //hintText: ,
           //hintStyle: TextStyle(fontSize: 10),
           labelText: 'Email',
-          labelStyle: TextStyle(color: Colors.blueAccent),
+          labelStyle: const TextStyle(color: Colors.blueAccent),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -114,7 +113,7 @@ class _EditProfileState extends State<EditProfile> {
       borderRadius: BorderRadius.circular(30),
       color: Theme.of(context).iconTheme.color,
       child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () async {
             user = _auth.currentUser!;
@@ -122,7 +121,7 @@ class _EditProfileState extends State<EditProfile> {
                 FirebaseFirestore.instance.collection('users').doc(user!.uid);
             docUser.update({'name': nameEditingController.text});
             await user?.reload();
-            user = await _auth.currentUser!;
+            user = _auth.currentUser!;
           },
           child: Text(
             "Enregistrer",
@@ -172,7 +171,7 @@ class _EditProfileState extends State<EditProfile> {
       appBar: app_bar(context, "Modifier mon profil"),
       body: Center(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(36),
+          padding: const EdgeInsets.all(36),
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Column(
@@ -184,8 +183,11 @@ class _EditProfileState extends State<EditProfile> {
                     fit: StackFit.expand,
                     clipBehavior: Clip.none,
                     children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage("${sp.image_url}"),
+                      Hero(
+                        tag: "profilepic",
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage("${sp.image_url}"),
+                        ),
                       ),
                       Positioned(
                         right: -16,
@@ -197,7 +199,7 @@ class _EditProfileState extends State<EditProfile> {
                             style: TextButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
-                                side: BorderSide(color: Colors.white),
+                                side: const BorderSide(color: Colors.white),
                               ),
                               primary: Theme.of(context).primaryColor,
                               backgroundColor: Colors.grey[200],
@@ -205,18 +207,21 @@ class _EditProfileState extends State<EditProfile> {
                             onPressed: () {
                               // saveProfilePicture();
                             },
-                            child: Icon(Icons.edit,color: Colors.black,),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       )
                     ],
                   ),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 nameField,
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 emailField,
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 saveButton,
               ],
             ),

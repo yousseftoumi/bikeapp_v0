@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child:
                   Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
             ),
-            contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Mot de passe",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -120,12 +120,12 @@ class _LoginScreenState extends State<LoginScreen> {
       borderRadius: BorderRadius.circular(30),
       color: Colors.blueAccent,
       child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
             handleEmailSignIn(emailController.text, passwordController.text);
           },
-          child: Text(
+          child: const Text(
             "Se connecter",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -134,7 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
@@ -152,46 +151,44 @@ class _LoginScreenState extends State<LoginScreen> {
                         "assets/bikeAppLogo.png",
                         fit: BoxFit.contain,
                       )),
-                  Text(
+                  const Text(
                     "Identification",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      // color: Colors.blue,
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   emailField,
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
                   passwordField,
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
                   loginButton,
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Vous n'avez pas de compte? "),
+                        const Text("Vous n'avez pas de compte? "),
                         GestureDetector(
                           onTap: () {
-                            nextScreen(context, RegistrationScreen());
+                            nextScreen(context, const RegistrationScreen());
                           },
-                          child: Text(
+                          child: const Text(
                             "S'enregistrer",
                             style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
+                                fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                         )
                       ]),
-                  SizedBox(height: 15),
-                  Text("OU",
+                  const SizedBox(height: 15),
+                  const Text("OU",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 15,
                           color: Colors.grey,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   // SignInButton(Buttons.Google, onPressed: () async {
                   //   await _googleSignIn.signIn();
                   //   setState(() {});

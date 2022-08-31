@@ -25,7 +25,6 @@ class _NavBarState extends State<NavBar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -46,23 +45,26 @@ class _NavBarState extends State<NavBar> {
           UserAccountsDrawerHeader(
             accountName: Text(
               "${sp.name}",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             accountEmail: Text(
               "${sp.email}",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
-                child: Image.network(
-                  "${sp.image_url}",
-                  fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
+                child: Hero(
+                  tag: "profilepic",
+                  child: Image.network(
+                    "${sp.image_url}",
+                    fit: BoxFit.cover,
+                    width: 90,
+                    height: 90,
+                  ),
                 ),
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               // color: kTextColor,
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -75,30 +77,30 @@ class _NavBarState extends State<NavBar> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Favoris'),
+            leading: const Icon(Icons.favorite),
+            title: const Text('Favoris'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Amis'),
+            leading: const Icon(Icons.person),
+            title: const Text('Amis'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.share),
-            title: Text('Share'),
+            leading: const Icon(Icons.share),
+            title: const Text('Share'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('Notifications'),
+            leading: const Icon(Icons.notifications),
+            title: const Text('Notifications'),
             onTap: () => null,
             trailing: ClipOval(
               child: Container(
                 color: Colors.red,
                 width: 20,
                 height: 20,
-                child: Center(
+                child: const Center(
                   child: Text(
                     '8',
                     style: TextStyle(
@@ -112,23 +114,23 @@ class _NavBarState extends State<NavBar> {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Paramètres'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Paramètres'),
             onTap: () => nextScreen(context, ParametresScreen()),
           ),
           ListTile(
-            leading: Icon(Icons.description),
-            title: Text('Policies'),
+            leading: const Icon(Icons.description),
+            title: const Text('Policies'),
             onTap: () => null,
           ),
           Divider(),
           ListTile(
-              title: Text('Se déconnecter'),
-              leading: Icon(Icons.exit_to_app),
+              title: const Text('Se déconnecter'),
+              leading: const Icon(Icons.exit_to_app),
               onTap: () async {
                 final action = await AlertDialogs.yesCancelDialog(
                     context, 'Se déconnecter', 'Êtes vous sûr ?');
-                if (action == DialogsAction.Oui) {
+                if (action == DialogsAction.oui) {
                   sp.userSignOut();
                   nextScreenReplace(context, const LoginScreen());
                   // setState(() => tappedYes = true);

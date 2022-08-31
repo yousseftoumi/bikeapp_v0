@@ -5,6 +5,7 @@ import 'package:bikeapp_v0/screens/auth/login_screen.dart';
 import 'package:bikeapp_v0/screens/home/notifications_screen.dart';
 import 'package:bikeapp_v0/screens/home/parametres_screen.dart';
 import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
+import 'package:bikeapp_v0/screens/profile/tutorial_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ class _ProfilescreenState extends State<Profilescreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
@@ -36,7 +36,7 @@ class _ProfilescreenState extends State<Profilescreen> {
     final sp = context.watch<SignInProvider>();
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
             SizedBox(
@@ -74,48 +74,62 @@ class _ProfilescreenState extends State<Profilescreen> {
                 ],
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               "${sp.name}",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text("${sp.email}"),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ProfileMenu(
-              text: "Mon Profil",
-              icon: Icon(Icons.person),
+              text: "Mon profil",
+              icon: const Icon(Icons.person),
               press: () {
-                nextScreen(context, EditProfile());
-              },
-            ),
-            ProfileMenu(
-              text: "Notifications",
-              icon: Icon(Icons.notifications),
-              press: () {
-                nextScreen(context, NotificationsScreen());
+                nextScreen(context, const EditProfile());
               },
             ),
             ProfileMenu(
               text: "Paramètres",
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               press: () {
                 nextScreen(context, ParametresScreen());
               },
             ),
             ProfileMenu(
               text: "Centre d'aide",
-              icon: Icon(Icons.help),
+              icon: const Icon(Icons.help),
               press: () {
-                nextScreen(context, AddBikeScreen());
+                
+              },
+            ),
+            ProfileMenu(
+              text: "Visite guidée",
+              icon: const Icon(Icons.auto_stories),
+              press: () {
+                nextScreen(context, const TutorialScreen());
+              },
+            ),
+            ProfileMenu(
+              text: "Partager l'application avec mes amis",
+              icon: const Icon(Icons.share),
+              press: () {
+                nextScreen(context, const AddBikeScreen());
+              },
+            ),
+            ProfileMenu(
+              text: "À propos de votre application",
+              icon: const Icon(Icons.perm_device_info),
+              press: () {
+                nextScreen(context, const AddStationScreen());
               },
             ),
             ProfileMenu(
               text: "Se déconnecter",
-              icon: Icon(Icons.exit_to_app),
+              icon: const Icon(Icons.exit_to_app),
               press: () async {
                 final action = await AlertDialogs.yesCancelDialog(
                     context, 'Se déconnecter', 'Êtes vous sûr ?');
-                if (action == DialogsAction.Oui) {
+                if (action == DialogsAction.oui) {
                   sp.userSignOut();
                   nextScreenReplace(context, const LoginScreen());
                 }
@@ -145,13 +159,13 @@ class ProfileMenu extends StatelessWidget {
     bool _darkMode =
         Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextButton(
         style: TextButton.styleFrom(
           primary: _darkMode
               ? Theme.of(context).scaffoldBackgroundColor
               : kTextColor,
-          padding: EdgeInsets.all(14),
+          padding: const EdgeInsets.all(14),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: _darkMode ? Colors.white : Colors.white,
@@ -160,13 +174,13 @@ class ProfileMenu extends StatelessWidget {
         child: Row(
           children: [
             icon,
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Expanded(
                 child: Text(
               text,
               style: TextStyle(color: _darkMode ? Colors.black : Colors.black),
             )),
-            Icon(Icons.arrow_forward_ios),
+            const Icon(Icons.arrow_forward_ios),
           ],
         ),
       ),

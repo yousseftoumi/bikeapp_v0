@@ -25,10 +25,11 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
+
 //with RestorationMixin
 class _HomeScreenState extends State<HomeScreen> {
   int curIndex = 0;
-  final screens = [
+  final screens = const [
     AccueilScreen(),
     FavorisScreen(),
     MapScreen(),
@@ -45,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     // FirebaseFirestore.instance
@@ -176,8 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //   ),
     // );
     return Scaffold(
-      backgroundColor: null,
-      drawer: NavBar(),
+      drawer: const NavBar(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Image.asset(
@@ -195,10 +194,10 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextButton.styleFrom(
                 primary: Theme.of(context).iconTheme.color),
             onPressed: () {
-              nextScreen(context, NotificationsScreen());
+              nextScreen(context, const NotificationsScreen());
             },
-            icon: Icon(Icons.notifications),
-            label: Text(''),
+            icon: const Icon(Icons.notifications),
+            label: const Text(''),
           ),
         ],
       ),
@@ -219,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           currentIndex: curIndex,
           elevation: 0,
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.favorite), label: 'Favoris'),

@@ -1,5 +1,4 @@
 import 'package:bikeapp_v0/utils/config.dart';
-import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:login_system/screens/location.dart';
 
@@ -99,8 +98,8 @@ class _StationScreenState extends State<StationScreen> {
                           )),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Center(
+                  const SizedBox(height: 10),
+                  const Center(
                       child: Text(
                     "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression"
                     // style: TextStyle(color: Theme.of(context).primaryColor)

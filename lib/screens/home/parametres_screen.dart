@@ -17,14 +17,13 @@ class _ParametresScreenState extends State<ParametresScreen> {
     return Scaffold(
       appBar: app_bar(context, "Paramètres"),
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: ListView(
           children: [
             Row(
-              children: [
+              children: const [
                 Icon(
                   Icons.person,
-                  //color: kTextColor,
                 ),
                 SizedBox(
                   width: 8,
@@ -35,18 +34,18 @@ class _ParametresScreenState extends State<ParametresScreen> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildAccountOptionRow(context, "Mes informations"),
             buildAccountOptionRow(context, "Mot de passe"),
             buildAccountOptionRow(context, "Notifications"),
             buildAccountOptionRow(context, "Langue"),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
@@ -58,26 +57,26 @@ class _ParametresScreenState extends State<ParametresScreen> {
                       : Icons.wb_sunny,
                   //color: kTextColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
-                Text(
+                const Text(
                   "Apparence",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Mode sombre",
                   style: TextStyle(
                     fontSize: 18,
@@ -87,11 +86,11 @@ class _ParametresScreenState extends State<ParametresScreen> {
                 ChangeThemeSwitch(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
-              children: [
+              children: const [
                 Icon(
                   Icons.help,
                   //color: kTextColor,
@@ -105,22 +104,22 @@ class _ParametresScreenState extends State<ParametresScreen> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             // buildNotificationOptionRow("New for you", true),
             buildAccountOptionRow(context, "J'ai besoin d'aide"),
             buildAccountOptionRow(
                 context, "J'ai une question de confidentialité"),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Column(
-              children: [
+              children: const [
                 Text(
                   "Bike App v1.3.5",
                   style: TextStyle(
@@ -140,16 +139,15 @@ class _ParametresScreenState extends State<ParametresScreen> {
             Center(
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {},
-                child: Text("SIGN OUT",
+                child: const Text("SIGN OUT",
                     style: TextStyle(fontSize: 16, letterSpacing: 2.2)),
               ),
             ),
-            SizedBox(height: 20)
           ],
         ),
       ),
@@ -162,7 +160,7 @@ class _ParametresScreenState extends State<ParametresScreen> {
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
             //color: Colors.grey[600]
@@ -213,13 +211,13 @@ class _ParametresScreenState extends State<ParametresScreen> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 //color: Colors.grey[600],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               // color: Colors.grey,
             ),

@@ -192,16 +192,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.blueAccent,
+      color: Theme.of(context).colorScheme.primary,
       child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
             signUp(emailEditingController.text, passwordEditingController.text);
             //handleEmailSignUp(
             //emailEditingController.text, passwordEditingController.text);
           },
-          child: Text(
+          child: const Text(
             "S'enregistrer",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -210,7 +210,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: app_bar(context, "S'inscrire"),
       body: Center(
         child: SingleChildScrollView(
@@ -224,12 +223,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Inscription",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: kTextColor,
                       ),
                     ),
                     SizedBox(height: 25),
@@ -253,12 +251,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             onTap: () {
                               nextScreen(context, LoginScreen());
                             },
-                            child: Text(
+                            child: const Text(
                               "Se connecter",
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
+                                  fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                           )
                         ]),

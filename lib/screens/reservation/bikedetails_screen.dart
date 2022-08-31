@@ -36,16 +36,23 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Image.network(widget.bike.image!),
+                    Hero(
+                      tag: widget.bike.bid!,
+                      child:
+                          // Container(
+                          //   height: 230,
+                          //   child:
+                          Image.network(widget.bike.image!),
+                    ),
                     // Image.asset(
                     //   Config.app_icon,
                     //   width: MediaQuery.of(context).size.width,
                     //   height: 250,
                     // ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -62,12 +69,14 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                         buildFlexible("Rating"),
                       ],
                     ),
-                    SizedBox(height: 10),
-                    Center(
-                        child: Text("${widget.bike.description!}"
-                            // style: TextStyle(color: Theme.of(context).primaryColor)
+                    const SizedBox(height: 10),
 
-                            )),
+                    Center(
+                      child: Text("${widget.bike.description}"
+                          // style: TextStyle(color: Theme.of(context).primaryColor)
+
+                          ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -103,7 +112,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: Colors.white),
+                        side: const BorderSide(color: Colors.white),
                       ),
                       primary: _darkMode
                           ? Theme.of(context).primaryIconTheme.color
@@ -114,10 +123,32 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                     ),
                     onPressed: () {},
                     child: Text(
-                      "${widget.bike.model!}",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                      "${widget.bike.model}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w900, fontSize: 22),
                     )),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: SizedBox(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: const BorderSide(color: Colors.white),
+                    ),
+                    primary: _darkMode
+                        ? Theme.of(context).primaryIconTheme.color
+                        : Colors.white,
+                    backgroundColor: _darkMode
+                        ? Theme.of(context).scaffoldBackgroundColor
+                        : kTextColor,
+                  ),
+                  onPressed: () {},
+                  child: const Icon(Icons.favorite),
+                ),
               ),
             ),
           ]),

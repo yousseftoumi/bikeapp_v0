@@ -31,8 +31,8 @@ class _AccueilScreenState extends State<AccueilScreen>
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 4),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 4),
               child: Text(
                 "Choisir votre vélo",
                 style: TextStyle(
@@ -44,23 +44,23 @@ class _AccueilScreenState extends State<AccueilScreen>
             ),
             TabBar(
               isScrollable: true,
-              indicatorPadding: EdgeInsets.all(0),
+              indicatorPadding: const EdgeInsets.all(0),
               labelPadding:
-                  EdgeInsets.only(left: 18, right: 18, top: 5, bottom: 5),
+                  const EdgeInsets.only(left: 18, right: 18, top: 5, bottom: 5),
               labelColor: _darkMode
                   ? Theme.of(context).scaffoldBackgroundColor
-                  : Theme.of(context).primaryColor,
-              labelStyle: TextStyle(
+                  : Colors.white,
+              labelStyle: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
               indicator: BoxDecoration(
-                color: Theme.of(context).primaryIconTheme.color,
+                color: _darkMode ? Colors.white : kNavyBlue,
                 borderRadius: BorderRadius.circular(10),
               ),
-              unselectedLabelColor: Theme.of(context).primaryIconTheme.color,
+              unselectedLabelColor: _darkMode ? Colors.white : kNavyBlue,
               controller: _tabController,
-              tabs: [
+              tabs: const [
                 Text(
                   'Favoris',
                   style: TextStyle(fontFamily: 'Varela_Round'),
@@ -73,7 +73,7 @@ class _AccueilScreenState extends State<AccueilScreen>
           ],
         )),
         Expanded(
-          child: TabBarView(controller: _tabController, children: [
+          child: TabBarView(controller: _tabController, children: const [
             CardWidget(),
             CardWidget(),
             CardWidget(),
