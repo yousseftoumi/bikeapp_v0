@@ -3,10 +3,10 @@ import 'package:bikeapp_v0/screens/home/parametres_screen.dart';
 import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:flutter/material.dart';
-import 'package:bikeapp_v0/model/user_model.dart';
+
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:provider/provider.dart';
 
 class NavBar extends StatefulWidget {
@@ -56,7 +56,7 @@ class _NavBarState extends State<NavBar> {
                 child: Hero(
                   tag: "profilepic",
                   child: Image.network(
-                    "${sp.image_url}",
+                    "${sp.imageUrl}",
                     fit: BoxFit.cover,
                     width: 90,
                     height: 90,
@@ -73,7 +73,7 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             onDetailsPressed: () {
-              nextScreen(context, EditProfile());
+              nextScreen(context, const EditProfile());
             },
           ),
           ListTile(
@@ -84,12 +84,12 @@ class _NavBarState extends State<NavBar> {
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Amis'),
-            onTap: () => null,
+            onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.share),
             title: const Text('Share'),
-            onTap: () => null,
+            onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.notifications),
@@ -112,7 +112,7 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Paramètres'),
@@ -123,7 +123,7 @@ class _NavBarState extends State<NavBar> {
             title: const Text('Policies'),
             onTap: () => null,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
               title: const Text('Se déconnecter'),
               leading: const Icon(Icons.exit_to_app),

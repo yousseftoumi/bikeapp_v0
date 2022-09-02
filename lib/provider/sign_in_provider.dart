@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-
-import 'package:bikeapp_v0/screens/auth/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +22,7 @@ class SignInProvider extends ChangeNotifier {
   bool _isSignedIn = false;
   bool get isSignedIn => _isSignedIn;
 
-  // //hasError, errorCode, provider,uid, email, name, image_url
+  // //hasError, errorCode, provider,uid, email, name, imageUrl
   bool _hasError = false;
   bool get hasError => _hasError;
 
@@ -43,8 +41,11 @@ class SignInProvider extends ChangeNotifier {
   String? _email;
   String? get email => _email;
 
-  String? _image_url;
-  String? get image_url => _image_url;
+  String? _birthDate;
+  String? get birthDate => _birthDate;
+
+  String? _imageUrl;
+  String? get imageUrl => _imageUrl;
 
   SignInProvider() {
     checkSignInUser();
@@ -73,7 +74,7 @@ class SignInProvider extends ChangeNotifier {
   //     // now save all values
   //     _name = userDetails.displayName;
   //     _email = userDetails.email;
-  //     _image_url = userDetails.photoURL;
+  //     _imageUrl = userDetails.photoURL;
   //     _provider = "EMAIL";
   //     _uid = userDetails.uid;
   //     notifyListeners();
@@ -135,7 +136,7 @@ class SignInProvider extends ChangeNotifier {
       // now save all values
       _name = userDetails.displayName;
       _email = userDetails.email;
-      _image_url = userDetails.photoURL;
+      _imageUrl = userDetails.photoURL;
       _provider = "EMAIL";
       _uid = userDetails.uid;
       notifyListeners();
@@ -206,7 +207,8 @@ class SignInProvider extends ChangeNotifier {
         // now save all values
         _name = userDetails.displayName;
         _email = userDetails.email;
-        _image_url = userDetails.photoURL;
+        _birthDate = "12/12/2000";
+        _imageUrl = userDetails.photoURL;
         _provider = "GOOGLE";
         _uid = userDetails.uid;
         notifyListeners();
@@ -250,7 +252,7 @@ class SignInProvider extends ChangeNotifier {
   //       // save all the data
   //       _name = userDetails!.name;
   //       _email = firebaseAuth.currentUser!.email;
-  //       _image_url = userDetails.thumbnailImage;
+  //       _imageUrl = userDetails.thumbnailImage;
   //       _uid = userDetails.id.toString();
   //       _provider = "TWITTER";
   //       _hasError = false;
@@ -298,7 +300,8 @@ class SignInProvider extends ChangeNotifier {
         // saving the values
         _name = profile['name'];
         _email = profile['email'];
-        _image_url = profile['picture']['data']['url'];
+        _birthDate = "";
+        _imageUrl = profile['picture']['data']['url'];
         _uid = profile['id'];
         _hasError = false;
         _provider = "FACEBOOK";
@@ -339,7 +342,8 @@ class SignInProvider extends ChangeNotifier {
               _uid = snapshot['uid'],
               _name = snapshot['name'],
               _email = snapshot['email'],
-              _image_url = snapshot['image_url'],
+              _birthDate = snapshot['birthDate'],
+              _imageUrl = snapshot['imageUrl'],
               _provider = snapshot['provider'],
             });
   }
@@ -350,8 +354,9 @@ class SignInProvider extends ChangeNotifier {
     await r.set({
       "name": _name,
       "email": _email,
+      "birthDate": _birthDate,
       "uid": _uid,
-      "image_url": _image_url,
+      "imageUrl": _imageUrl,
       "provider": _provider,
     });
     notifyListeners();
@@ -361,8 +366,9 @@ class SignInProvider extends ChangeNotifier {
     final SharedPreferences s = await SharedPreferences.getInstance();
     await s.setString('name', _name!);
     await s.setString('email', _email!);
+    await s.setString('birthDate', _birthDate!);
     await s.setString('uid', _uid!);
-    await s.setString('image_url', _image_url!);
+    await s.setString('imageUrl', _imageUrl!);
     await s.setString('provider', _provider!);
     notifyListeners();
   }
@@ -371,7 +377,8 @@ class SignInProvider extends ChangeNotifier {
     final SharedPreferences s = await SharedPreferences.getInstance();
     _name = s.getString('name');
     _email = s.getString('email');
-    _image_url = s.getString('image_url');
+    _birthDate = s.getString('birthDate');
+    _imageUrl = s.getString('imageUrl');
     _uid = s.getString('uid');
     _provider = s.getString('provider');
     notifyListeners();
@@ -407,20 +414,22 @@ class SignInProvider extends ChangeNotifier {
     s.clear();
   }
 
-  void phoneNumberUser(User user, email, name) {
+  void phoneNumberUser(User user, email, name, birthDate) {
     _name = name;
     _email = email;
-    _image_url =
+    _birthDate = birthDate;
+    _imageUrl =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTN9TaGrF3qmBtBoXN5TaTdijk8dUfq2z7w6a-QjVoEjtxv2f2IcWph0-e7avSfpgTjdg&usqp=CAU";
     _uid = user.phoneNumber;
     _provider = "PHONE";
     notifyListeners();
   }
 
-  void signUpUser(User user, email, name) {
+  void signUpUser(User user, email, name, birthDate) {
     _name = name;
     _email = email;
-    _image_url =
+    _birthDate = birthDate;
+    _imageUrl =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTN9TaGrF3qmBtBoXN5TaTdijk8dUfq2z7w6a-QjVoEjtxv2f2IcWph0-e7avSfpgTjdg&usqp=CAU";
     _uid = user.uid;
     _provider = "EMAIL";

@@ -1,19 +1,16 @@
 import 'package:bikeapp_v0/provider/internet_provider.dart';
 import 'package:bikeapp_v0/provider/sign_in_provider.dart';
+import 'package:bikeapp_v0/screens/auth/forgot_password.dart';
 import 'package:bikeapp_v0/screens/home/home_screen.dart';
 import 'package:bikeapp_v0/screens/auth/phoneauth_screen.dart';
 import 'package:bikeapp_v0/screens/auth/verifyemail_screen.dart';
-import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:bikeapp_v0/utils/snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bikeapp_v0/screens/auth/registeration_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,8 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
       RoundedLoadingButtonController();
 
   //editing controller
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   //firebase
   final _auth = FirebaseAuth.instance;
@@ -72,8 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -86,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
         controller: passwordController,
         obscureText: _obscureText,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{6,}$');
+          RegExp regex = RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
             return ("Mot de passe est obligatoire !");
           }
@@ -99,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-            prefixIcon: Icon(Icons.vpn_key),
+            prefixIcon: const Icon(Icons.vpn_key),
             suffixIcon: GestureDetector(
               onTap: () {
                 setState(() {
@@ -118,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.blueAccent,
+      // color: Colors.blueAccent,
       child: MaterialButton(
           padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
@@ -163,7 +160,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   emailField,
                   const SizedBox(height: 25),
                   passwordField,
-                  const SizedBox(height: 25),
+                  TextButton(
+                      onPressed: () {
+                        nextScreen(context, const ForgotPasswordScreen());
+                      },
+                      child: const Text("Mot de passe oublié ?")),
+                  const SizedBox(height: 5),
                   loginButton,
                   const SizedBox(height: 15),
                   Row(

@@ -2,14 +2,13 @@ import 'package:bikeapp_v0/provider/sign_in_provider.dart';
 import 'package:bikeapp_v0/screens/admin/addbike_screen.dart';
 import 'package:bikeapp_v0/screens/admin/addstation_screen.dart';
 import 'package:bikeapp_v0/screens/auth/login_screen.dart';
-import 'package:bikeapp_v0/screens/home/notifications_screen.dart';
 import 'package:bikeapp_v0/screens/home/parametres_screen.dart';
 import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
 import 'package:bikeapp_v0/screens/profile/tutorial_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:provider/provider.dart';
 
 class Profilescreen extends StatefulWidget {
@@ -47,7 +46,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                 clipBehavior: Clip.none,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage("${sp.image_url}"),
+                    backgroundImage: NetworkImage("${sp.imageUrl}"),
                   ),
                   // Positioned(
                   //   right: -16,
@@ -98,9 +97,7 @@ class _ProfilescreenState extends State<Profilescreen> {
             ProfileMenu(
               text: "Centre d'aide",
               icon: const Icon(Icons.help),
-              press: () {
-                
-              },
+              press: () {},
             ),
             ProfileMenu(
               text: "Visite guidée",

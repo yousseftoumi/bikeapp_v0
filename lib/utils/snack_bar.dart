@@ -5,7 +5,7 @@ void openSnackbar(context, snackMessage, color) {
       backgroundColor: color,
       action: SnackBarAction(
         label: "OK",
-        textColor: Colors.white,
+        textColor: Theme.of(context).iconTheme.color,
         onPressed: () {},
       ),
       content: Text(

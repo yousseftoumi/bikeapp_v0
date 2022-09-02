@@ -106,7 +106,8 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
               ),
             ),
             Positioned(
-              top: 0.0,
+              top: -2,
+              left: 0,
               child: SizedBox(
                 child: TextButton(
                     style: TextButton.styleFrom(
@@ -130,24 +131,26 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
               ),
             ),
             Positioned(
-              top: 0,
+              top: -2,
               right: 0,
               child: SizedBox(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: const BorderSide(color: Colors.white),
+                child: ClipOval(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: const BorderSide(color: Colors.white),
+                      ),
+                      primary: _darkMode
+                          ? Theme.of(context).primaryIconTheme.color
+                          : Colors.white,
+                      backgroundColor: _darkMode
+                          ? Theme.of(context).scaffoldBackgroundColor
+                          : kTextColor,
                     ),
-                    primary: _darkMode
-                        ? Theme.of(context).primaryIconTheme.color
-                        : Colors.white,
-                    backgroundColor: _darkMode
-                        ? Theme.of(context).scaffoldBackgroundColor
-                        : kTextColor,
+                    onPressed: () {},
+                    child: const Icon(Icons.favorite),
                   ),
-                  onPressed: () {},
-                  child: const Icon(Icons.favorite),
                 ),
               ),
             ),

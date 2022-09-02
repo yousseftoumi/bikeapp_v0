@@ -42,39 +42,44 @@ class CardWidget extends StatelessWidget {
                           : Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Hero(
-                            tag: bikes[index]['bid'],
-                            child: Image.network(
-                              bikes[index]['image'],
-                              width: 150,
-                              height: 110,
-                              fit: BoxFit.scaleDown,
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 4,
                             ),
-                          ),
-                          Text(
-                            "${bikes[index]['brand']}",
-                            style: TextStyle(
-                                color: _darkMode
-                                    ? Theme.of(context).scaffoldBackgroundColor
-                                    : Colors.black,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Text("${bikes[index]['speed']} Km/h",
+                            Hero(
+                              tag: bikes[index]['bid'],
+                              child: Image.network(
+                                bikes[index]['image'],
+                                width: 150,
+                                height: 110,
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                            Text(
+                              "${bikes[index]['brand']}",
                               style: TextStyle(
-                                color: _darkMode
-                                    ? Theme.of(context).scaffoldBackgroundColor
-                                    : Colors.black,
-                              )),
-                        ],
+                                  color: _darkMode
+                                      ? Theme.of(context)
+                                          .scaffoldBackgroundColor
+                                      : Colors.black,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text("${bikes[index]['speed']} Km/h",
+                                style: TextStyle(
+                                  color: _darkMode
+                                      ? Theme.of(context)
+                                          .scaffoldBackgroundColor
+                                      : Colors.black,
+                                )),
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -17,7 +17,7 @@ class _AccueilScreenState extends State<AccueilScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this, initialIndex: 0)
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0)
       ..addListener(() {});
   }
 

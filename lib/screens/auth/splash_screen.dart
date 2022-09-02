@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Center(
+        const Center(
             child: Image(
           image: AssetImage(Config.app_icon),
           height: 200,

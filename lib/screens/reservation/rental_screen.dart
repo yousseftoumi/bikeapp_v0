@@ -3,6 +3,7 @@ import 'package:bikeapp_v0/model/reservation_model.dart';
 import 'package:bikeapp_v0/screens/reservation/confirmation_screen.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
+import 'package:bikeapp_v0/utils/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -218,28 +219,35 @@ class _RentalScreenState extends State<RentalScreen> {
                           starting = widget.bike.currentStation!;
                           reserve = true;
                         });
+                        if (destination != null) {
+                          final reservationRef = FirebaseFirestore.instance
+                              .collection('reservations')
+                              .doc();
 
-                        final reservationRef = FirebaseFirestore.instance
-                            .collection('reservations')
-                            .doc();
+                          Reservation reservation = Reservation(
+                            id: reservationRef.id,
+                            idUser: FirebaseAuth.instance.currentUser!.uid,
+                            starting: starting!,
+                            destination: destination!,
+                            date: DateTime(date.year, date.month, date.day,
+                                time.hour, time.minute),
+                            duration: duration,
+                            price: price,
+                          );
 
-                        Reservation reservation = Reservation(
-                          id: reservationRef.id,
-                          idUser: FirebaseAuth.instance.currentUser!.uid,
-                          starting: starting!,
-                          destination: destination!,
-                          date: DateTime(date.year, date.month, date.day,
-                              time.hour, time.minute),
-                          duration: duration,
-                          price: price,
-                        );
+                          await reservationRef.set(reservation.toJson());
 
-                        await reservationRef.set(reservation.toJson());
-
-                        setState(() {
-                          reserve = false;
-                        });
-                        nextScreen(context, ConfirmationScreen());
+                          setState(() {
+                            reserve = false;
+                          });
+                          nextScreen(context, const ConfirmationScreen());
+                        } else {
+                          openSnackbar(context,
+                              "Veuillez saisir votre destination", Colors.red);
+                          setState(() {
+                            reserve = false;
+                          });
+                        }
                       },
                       child: const Text(
                         "Réserver",

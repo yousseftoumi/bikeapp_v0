@@ -37,7 +37,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
+                const Center(
                   child: Image(
                       image: AssetImage(Config.app_icon), height: 90, width: 90),
                 ),
@@ -205,7 +205,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                                   .user!;
                               // save the values
                               sp.phoneNumberUser(user, emailController.text,
-                                  nameController.text);
+                                  nameController.text,"");
                               // checking whether user exists,
                               sp.checkUserExists().then((value) async {
                                 if (value == true) {
