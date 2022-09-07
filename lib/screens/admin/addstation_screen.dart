@@ -102,12 +102,12 @@ class _AddStationScreenState extends State<AddStationScreen> {
                                   .collection('stations')
                                   .doc();
                               Station station = Station(
-                                  id: stationsRef.id,
+                                  sid: stationsRef.id,
                                   name: nameController.text,
                                   address: addressController.text,
                                   nbBikes: nbBikesController.text);
 
-                              await stationsRef.set(station.toJson());
+                              await stationsRef.set(station.toMap());
 
                               setState(() {
                                 _loading = false;

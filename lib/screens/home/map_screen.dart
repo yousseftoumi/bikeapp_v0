@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:bikeapp_v0/model/station_model.dart';
 import 'package:bikeapp_v0/screens/home/favoris_screen.dart';
 import 'package:bikeapp_v0/screens/reservation/station_screen.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -15,52 +17,71 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   //add multiple markers on the map
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   List<Marker> markers = [];
 
   @override
   void initState() {
-    intilize();
+    intialize();
     super.initState();
   }
 
-  intilize() {
-    Marker firstMarker = Marker(
-      markerId: const MarkerId('Station Maarif'),
-      position: const LatLng(33.56806300637081, -7.628466552353953),
-      infoWindow: const InfoWindow(title: 'Station Maarif'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-    );
-    Marker secondMarker = Marker(
-      markerId: const MarkerId('Station Mosquée Hassan-II'),
-      position: const LatLng(33.60950735526005, -7.633051170093907),
-      infoWindow: const InfoWindow(title: 'Station Mosquée Hassan-II'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-    );
-    Marker thirdMarker = Marker(
-      markerId: const MarkerId('Station Place des Nations Unies'),
-      position: const LatLng(33.595194912570044, -7.618696588039488),
-      infoWindow: const InfoWindow(title: 'Station Place des Nations Unies'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-      onTap: () => nextScreen(context, StationScreen()),
-    );
-    Marker forthMarker = Marker(
-      markerId: const MarkerId('Station Morocco Mall'),
-      position: const LatLng(33.57691956355926, -7.707088013896289),
-      infoWindow: const InfoWindow(title: 'Station Morocco Mall'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-    );
-    Marker fifthMarker = Marker(
-      markerId: const MarkerId('Station Anfa Place'),
-      position: const LatLng(33.599192545109936, -7.664233691337921),
-      infoWindow: const InfoWindow(title: 'Station Anfa Place'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-    );
-    markers.add(firstMarker);
-    markers.add(secondMarker);
-    markers.add(thirdMarker);
-    markers.add(forthMarker);
-    markers.add(fifthMarker);
+  intialize() {
+    // StreamBuilder(
+    //   stream: readStations(),
+    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //     if (snapshot.hasError) {
+    //       return const Text("Something was wrong");
+    //     } else if (snapshot.hasData) {
+    //       List stations = snapshot.data as List<Map<String, dynamic>>;
+    //       return 
+          Marker firstMarker = Marker(
+            markerId: const MarkerId('Station Maarif'),
+            position: const LatLng(33.56806300637081, -7.628466552353953),
+            infoWindow: const InfoWindow(title: 'Station Maarif'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueAzure),
+          );
+          Marker secondMarker = Marker(
+            markerId: const MarkerId('Station Mosquée Hassan-II'),
+            position: const LatLng(33.60950735526005, -7.633051170093907),
+            infoWindow: const InfoWindow(title: 'Station Mosquée Hassan-II'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueAzure),
+          );
+          Marker thirdMarker = Marker(
+            markerId: const MarkerId('Station Place des Nations Unies'),
+            position: const LatLng(33.595194912570044, -7.618696588039488),
+            infoWindow:
+                const InfoWindow(title: 'Station Place des Nations Unies'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueAzure),
+            // onTap: () => nextScreen(context,
+                // StationScreen(station: Station.fromMap(stations[index]))),
+          );
+          Marker forthMarker = Marker(
+            markerId: const MarkerId('Station Morocco Mall'),
+            position: const LatLng(33.57691956355926, -7.707088013896289),
+            infoWindow: const InfoWindow(title: 'Station Morocco Mall'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueAzure),
+          );
+          Marker fifthMarker = Marker(
+            markerId: const MarkerId('Station Anfa Place'),
+            position: const LatLng(33.599192545109936, -7.664233691337921),
+            infoWindow: const InfoWindow(title: 'Station Anfa Place'),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueAzure),
+          );
+          markers.add(firstMarker);
+          markers.add(secondMarker);
+          markers.add(thirdMarker);
+          markers.add(forthMarker);
+          markers.add(fifthMarker);
+    //     }
+    //   },
+    // );
+
     setState(() {});
   }
 
@@ -150,3 +171,8 @@ Marker _destination=Marker(
   //   }
   //}
 }
+
+Stream<List<Map<String, dynamic>>> readStations() => FirebaseFirestore.instance
+    .collection('stations')
+    .snapshots()
+    .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());

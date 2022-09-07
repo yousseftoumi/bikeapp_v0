@@ -1,4 +1,5 @@
 import 'package:bikeapp_v0/utils/card_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class _AccueilScreenState extends State<AccueilScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0)
+    _tabController = TabController(length: 4, vsync: this, initialIndex: 0)
       ..addListener(() {});
   }
 
@@ -62,6 +63,10 @@ class _AccueilScreenState extends State<AccueilScreen>
               controller: _tabController,
               tabs: const [
                 Text(
+                  'Tous',
+                  style: TextStyle(fontFamily: 'Varela_Round'),
+                ),
+                Text(
                   'Favoris',
                   style: TextStyle(fontFamily: 'Varela_Round'),
                 ),
@@ -73,10 +78,19 @@ class _AccueilScreenState extends State<AccueilScreen>
           ],
         )),
         Expanded(
-          child: TabBarView(controller: _tabController, children: const [
-            CardWidget(),
-            CardWidget(),
-            CardWidget(),
+          child: TabBarView(controller: _tabController, children: [
+            CardWidget(
+              stream: readAllBikes(),
+            ),
+            CardWidget(
+              stream: readAllBikes(),
+            ),
+            CardWidget(
+              stream: readClassicBikes(),
+            ),
+            CardWidget(
+              stream: readElectricBikes(),
+            ),
           ]),
         )
       ],
@@ -84,48 +98,68 @@ class _AccueilScreenState extends State<AccueilScreen>
   }
 }
 // body: Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: <Widget>[
-    //     Padding(
-    //       padding: const EdgeInsets.symmetric(horizontal: 30),
-    //       child: Text(
-    //         "Choisir votre vélo",
-    //         style: TextStyle(
-    //             color: Colors.blue,
-    //             fontWeight: FontWeight.bold,
-    //             fontSize: 23),
-    //       ),
-    //     ),
-    //     Types(),
-    // Expanded(
-    //   child: Padding(
-    //     padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-    //     child: GridView.builder(
-    //         itemCount: bikes.length,
-    //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //           crossAxisCount: 2,
-    //           mainAxisSpacing: kDefaultPaddin,
-    //           crossAxisSpacing: kDefaultPaddin,
-    //           childAspectRatio: 0.75,
-    //         ),
-    //         itemBuilder: (context, index) => ItemCard(
-    //               product: bikes[index],
-    //               press: () => Navigator.push(
-    //                   context,
-    //                   MaterialPageRoute(
-    //                     builder: (context) => DetailsScreen(
-    //                       product: bikes[index],
-    //                     ),
-    //                   )),
-    //             )),
-    //   ),
-    // ),
-    //   ],
-    // ));
+//   crossAxisAlignment: CrossAxisAlignment.start,
+//   children: <Widget>[
+//     Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 30),
+//       child: Text(
+//         "Choisir votre vélo",
+//         style: TextStyle(
+//             color: Colors.blue,
+//             fontWeight: FontWeight.bold,
+//             fontSize: 23),
+//       ),
+//     ),
+//     Types(),
+// Expanded(
+//   child: Padding(
+//     padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+//     child: GridView.builder(
+//         itemCount: bikes.length,
+//         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//           crossAxisCount: 2,
+//           mainAxisSpacing: kDefaultPaddin,
+//           crossAxisSpacing: kDefaultPaddin,
+//           childAspectRatio: 0.75,
+//         ),
+//         itemBuilder: (context, index) => ItemCard(
+//               product: bikes[index],
+//               press: () => Navigator.push(
+//                   context,
+//                   MaterialPageRoute(
+//                     builder: (context) => DetailsScreen(
+//                       product: bikes[index],
+//                     ),
+//                   )),
+//             )),
+//   ),
+// ),
+//   ],
+// ));
 
-  // // the logout function
-  // Future<void> logout(BuildContext context) async {
-  //   await FirebaseAuth.instance.signOut();
-  //   Navigator.of(context).pushReplacement(
-  //       MaterialPageRoute(builder: (context) => LoginScreen()));
-  // }
+// // the logout function
+// Future<void> logout(BuildContext context) async {
+//   await FirebaseAuth.instance.signOut();
+//   Navigator.of(context).pushReplacement(
+//       MaterialPageRoute(builder: (context) => LoginScreen()));
+// }
+Stream<List<Map<String, dynamic>>> readAllBikes() => FirebaseFirestore.instance
+    .collection('bikes')
+    .snapshots()
+    .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+
+// Stream<List<Map<String, dynamic>>> readFavorisBikes() => FirebaseFirestore.instance.collection('bikes').where('favoris', arrayContains: FirebaseAuth.instance.currentUser!.uid).snapshots().map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+
+Stream<List<Map<String, dynamic>>> readElectricBikes() =>
+    FirebaseFirestore.instance
+        .collection('bikes')
+        .where("type", isEqualTo: "électrique")
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+
+Stream<List<Map<String, dynamic>>> readClassicBikes() =>
+    FirebaseFirestore.instance
+        .collection('bikes')
+        .where("type", isEqualTo: "classique")
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());

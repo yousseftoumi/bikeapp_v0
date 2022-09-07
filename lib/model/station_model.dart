@@ -1,20 +1,28 @@
 class Station {
-  final String id;
+  final String sid;
   final String name;
   final String address;
   final String nbBikes;
 
   Station({
-    required this.id,
+    required this.sid,
     required this.name, 
     required this.address, 
     required this.nbBikes
   });
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
+ factory Station.fromMap(map) {
+    return Station(
+      sid: map['bid'],
+      name: map['name'],
+      address: map['address'],
+      nbBikes: map['nbBikes'],
+    );
+  }
+  Map<String, dynamic> toMap() => {
+    "id": sid,
     "name": name,
     "address": address,
     "nbBikes": nbBikes
   };
+
 }

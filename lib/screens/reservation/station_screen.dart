@@ -1,9 +1,11 @@
+import 'package:bikeapp_v0/model/station_model.dart';
 import 'package:bikeapp_v0/utils/config.dart';
 import 'package:flutter/material.dart';
 // import 'package:login_system/screens/location.dart';
 
 class StationScreen extends StatefulWidget {
-  const StationScreen({Key? key}) : super(key: key);
+  Station station;
+  StationScreen({Key? key, required this.station}) : super(key: key);
 
   @override
   State<StationScreen> createState() => _StationScreenState();
@@ -13,11 +15,11 @@ class _StationScreenState extends State<StationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: app_bar(context, "Détails vélo"),
+        appBar: app_bar(context, "Détails Station"),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(20, 32, 20, 20),
           child: Card(
-            color:Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
+            color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
             child: Padding(
@@ -101,10 +103,10 @@ class _StationScreenState extends State<StationScreen> {
                   const SizedBox(height: 10),
                   const Center(
                       child: Text(
-                    "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression"
-                    // style: TextStyle(color: Theme.of(context).primaryColor)
-                  
-                  )),
+                          "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression"
+                          // style: TextStyle(color: Theme.of(context).primaryColor)
+
+                          )),
                   const SizedBox(
                     height: 20,
                   ),

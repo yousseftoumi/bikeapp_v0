@@ -135,7 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           }
         },
         onSaved: (value) {
-          nameEditingController.text = value!;
+          passwordEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(

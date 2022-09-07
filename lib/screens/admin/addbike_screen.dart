@@ -23,7 +23,7 @@ class _AddBikeScreenState extends State<AddBikeScreen> {
   TextEditingController speedController = TextEditingController();
   TextEditingController rangeController = TextEditingController();
 
-  var biketypes = ['Classique', 'Électrique'];
+  var biketypes = ['classique', 'électrique'];
 
   final formkey = GlobalKey<FormState>();
 

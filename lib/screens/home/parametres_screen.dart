@@ -1,4 +1,4 @@
-import 'package:bikeapp_v0/screens/profile/editprofile_screen.dart';
+import 'package:bikeapp_v0/screens/auth/change_password.dart';
 import 'package:bikeapp_v0/utils/next_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +41,11 @@ class _ParametresScreenState extends State<ParametresScreen> {
             const SizedBox(
               height: 10,
             ),
-            buildAccountOptionRow(context, "Mes informations"),
-            buildAccountOptionRow(context, "Mot de passe"),
-            buildAccountOptionRow(context, "Notifications"),
-            buildAccountOptionRow(context, "Langue"),
+            buildAccountOptionRow(context, "Mes informations", null),
+            buildAccountOptionRow(
+                context, "Mot de passe", const ChangePasswordScreen()),
+            buildAccountOptionRow(context, "Notifications", null),
+            buildAccountOptionRow(context, "Langue", null),
             const SizedBox(
               height: 40,
             ),
@@ -112,9 +113,9 @@ class _ParametresScreenState extends State<ParametresScreen> {
               height: 10,
             ),
             // buildNotificationOptionRow("New for you", true),
-            buildAccountOptionRow(context, "J'ai besoin d'aide"),
+            buildAccountOptionRow(context, "J'ai besoin d'aide", null),
             buildAccountOptionRow(
-                context, "J'ai une question de confidentialité"),
+                context, "J'ai une question de confidentialité", null),
             const SizedBox(
               height: 50,
             ),
@@ -176,33 +177,11 @@ class _ParametresScreenState extends State<ParametresScreen> {
     );
   }
 
-  GestureDetector buildAccountOptionRow(BuildContext context, String title) {
+  GestureDetector buildAccountOptionRow(
+      BuildContext context, String title, page) {
     return GestureDetector(
       onTap: () {
-        // nextScreen(context, page);
-        // showDialog(
-
-        //     context: context,
-        //     builder: (BuildContext context) {
-        //       return AlertDialog(
-        //         title: Text(title),
-        //         content: Column(
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: [
-        //             Text("Option 1"),
-        //             Text("Option 2"),
-        //             Text("Option 3"),
-        //           ],
-        //         ),
-        //         actions: [
-        //           FlatButton(
-        //               onPressed: () {
-        //                 Navigator.of(context).pop();
-        //               },
-        //               child: Text("Close")),
-        //         ],
-        //       );
-        //     });
+        nextScreen(context, page);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
