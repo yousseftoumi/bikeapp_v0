@@ -21,7 +21,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
         Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
 
     return Scaffold(
-        appBar: app_bar(context, "Détails vélo"),
+        appBar: app_bar(context, "Détails vélo ${widget.bike.type}"),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(20, 32, 20, 20),
           child: Stack(children: [

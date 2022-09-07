@@ -7,16 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({Key? key}) : super(key: key);
+  Stream stream;
+  CardWidget({Key? key, required this.stream}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool _darkMode =
         Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 0),
       child: StreamBuilder(
-        stream: readBikes(),
+        stream: stream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return const Text("Something was wrong");
@@ -46,16 +47,29 @@ class CardWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(3.0),
                         child: Column(
                           children: [
-                            const SizedBox(
-                              height: 4,
-                            ),
+                            // const SizedBox(
+                            //   height: 6,
+                            // ),
                             Hero(
                               tag: bikes[index]['bid'],
-                              child: Image.network(
-                                bikes[index]['image'],
-                                width: 150,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
                                 height: 110,
-                                fit: BoxFit.scaleDown,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30)),
+                                  image: DecorationImage(
+                                      fit: BoxFit.fitWidth,
+                                      image:
+                                          NetworkImage(bikes[index]['image'])),
+
+                                  // child: Image.network(
+                                  //   bikes[index]['image'],
+                                  //   width: 155,
+                                  //   height: 110,
+                                  //   fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                             Text(
